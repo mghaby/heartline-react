@@ -11,7 +11,7 @@ const users = [
   }
 ]
 
-class Sigin extends React.Component{
+class SignIn extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
@@ -71,4 +71,4 @@ class Sigin extends React.Component{
   }
 }
 
-export default SiginIn;
+export default SignIn;
