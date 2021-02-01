@@ -1,10 +1,10 @@
 import WeightLog from './WeightLog';
-import Nav from './Nav';
+// import Nav from './Nav';
 
 function Landing() {
     return(
         <div>
-        <Nav />
+        {/* <Nav /> */}
         <h1>HealthLine</h1>
         <h3>Health Made Easy</h3>
         <hr/>
