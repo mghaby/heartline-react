@@ -1,11 +1,10 @@
-import './index.css';
-import WeightLog from './WeightLog';
-// import Nav from './Nav';
+import '../index.css';
+import WeightLog from '../WeightLog';
+
 
 function Landing() {
     return(
         <div>
-        {/* <Nav /> */}
         <h1 style={{textAlign: 'center', color: '#00B4D8'}}>HealthLine</h1>
         <h3 style={{textAlign: 'center', color: '#00B4D8'}}>Health Made Easy</h3>
         <hr/>
