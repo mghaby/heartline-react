@@ -1,13 +1,10 @@
 import React from 'react'
-import Progress from './components/Progess'
-import OutlinedButtons from './components/Button'
+import Calories from './Calories'
 
 function Home() {
     return (
       <div>
-          <h1>Index Page</h1>
-          <div style={{width:200}}><Progress /></div>
-          <OutlinedButtons />
+          <Calories />
       </div>
       
   
