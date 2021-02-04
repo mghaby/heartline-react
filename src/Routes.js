@@ -32,7 +32,6 @@ function Routes() {
           </li>
 
         </ul>
-        <hr />
         <Switch>
         <Route exact path="/">
             <Landing />

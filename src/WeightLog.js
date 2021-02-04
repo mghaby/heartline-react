@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+// make all text in here black/grey
+
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
