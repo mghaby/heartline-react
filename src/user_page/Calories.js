@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Progress from './components/Progess'
-import OutlinedButtons from './components/Button'
 import FormDialog from './components/Button_Form'
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
@@ -23,8 +22,6 @@ function Calories() {
           <div style={{width:200}}><Progress value={calories}/></div>
           <FormDialog value={AddSharpIcon} onClick={handleOnClickAdd}/> 
           <FormDialog value={RemoveSharpIcon} onClick={handleOnClickSubtract}/>
-          <OutlinedButtons value={AddSharpIcon}/>
-          <OutlinedButtons value={RemoveSharpIcon} />
       </div>
       
   
