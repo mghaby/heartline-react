@@ -30,29 +30,19 @@ function Routes() {
           <li>
             <Link to="/Settings">Settings</Link>
           </li>
-
         </ul>
+
         <Switch>
-        <Route exact path="/">
-            <Landing />
-          </Route>
-          <Route path="/SignIn">
-            <SignIn />
-          </Route>
-          <Route path="/SignUp">
-            <SignUp />
-          </Route>
-          <Route path="/Index">
-            <Index />
-          </Route>
-          <Route path="/Settings">
-            <Settings />
-          </Route>
+          <Route exact path="/" component={Landing} />
+          <Route path="/SignIn" component={SignIn} /> 
+          <Route path="/SignUp" component={SignUp} />
+          <Route path="/Index" component={Index} />
+          <Route path="/Settings" component={Settings} />
         </Switch>
       </div>
     </Router>
     )
-}
+};
 
 
 export default Routes;

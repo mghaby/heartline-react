@@ -119,7 +119,6 @@ function SignUp() {
           variant="outlined"
           />
       <br/>
-
       <TextField
           id="outlined-number"
           label="Current Weight"
