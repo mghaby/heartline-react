@@ -24,9 +24,14 @@ export default function FormDialog(props) {
   }
 
   const handleSubmit = () => {
-      props.onClick(parseInt(number, 10))
+      const num = parseInt(number, 10)
+      if (isNaN(num)) {
+          setOpen(false)
+      } else {
+      props.onClick(num)
       setOpen(false);
       setNumber('')
+      }
   }
 
   return (
