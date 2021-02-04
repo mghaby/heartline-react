@@ -1,12 +1,13 @@
 import './App.css';
-import Landing from './Landing';
 import Nav from './Nav';
+import Routes from './Routes';
 
 function App() {
   return (
     <div>
       <Nav />
-      {/* <Landing /> */}
+      <hr/>
+      <Routes />
     </div>
     
 
