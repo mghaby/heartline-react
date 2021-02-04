@@ -2,6 +2,8 @@ import './App.css';
 import Landing from './Landing';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Index from './Index_Page/Index';
+import Settings from './Settings_Page/Settings';
 import {
     BrowserRouter as Router,
     Switch,
@@ -23,6 +25,13 @@ function Nav() {
           <li>
             <Link to="/SignUp">SignUp</Link>
           </li>
+          <li>
+            <Link to="/Index">Index</Link>
+          </li>
+          <li>
+            <Link to="/Settings">Settings</Link>
+          </li>
+
         </ul>
         <hr />
         <Switch>
@@ -34,6 +43,12 @@ function Nav() {
           </Route>
           <Route path="/SignUp">
             <SignUp />
+          </Route>
+          <Route path="/Index">
+            <Index />
+          </Route>
+          <Route path="/Settings">
+            <Settings />
           </Route>
         </Switch>
       </div>
