@@ -5,6 +5,16 @@ import Grid from '@material-ui/core/Grid';
 
 // make all text in here black/grey
 
+
+const paperStyles = {
+    backgroundColor: "rgba(0,0,0, 0)",
+    borderRadius: "20px",
+    padding: "10px",
+    width: "150px",
+    textAlign: "center",
+    height: "175px"
+};
+
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -25,53 +35,72 @@ function WeightLog(){
             direction="row"
             justify="space-evenly"
             alignItems="center">
-            <Paper>
+            <Paper elevation={3}
+            style={paperStyles}>
                 Username:
+                <br/>
                 <br/>
                 Goal Weight:
                 <br/>
+                <br/>
                 Current Weight:
+                <br/>
                 <br/>
                 Age:
             </Paper>
-            <Paper>
+            <Paper elevation={3}
+            style={paperStyles}>
                 Username:
+                <br/>
                 <br/>
                 Goal Weight:
                 <br/>
+                <br/>
                 Current Weight:
+                <br/>
                 <br/>
                 Age:
             </Paper>
-            <Paper>
+            <Paper elevation={3}
+            style={paperStyles}>
                 Username:
+                <br/>
                 <br/>
                 Goal Weight:
                 <br/>
+                <br/>
                 Current Weight:
+                <br/>
                 <br/>
                 Age:
             </Paper>
-            <Paper>
+            <Paper elevation={3}
+            style={paperStyles}>
                 Username:
+                <br/>
                 <br/>
                 Goal Weight:
                 <br/>
+                <br/>
                 Current Weight:
+                <br/>
                 <br/>
                 Age:
             </Paper>
-            <Paper>
+            <Paper elevation={3}
+            style={paperStyles}>
                 Username:
+                <br/>
                 <br/>
                 Goal Weight:
                 <br/>
+                <br/>
                 Current Weight:
+                <br/>
                 <br/>
                 Age:
             </Paper>
         </Grid>
-        <hr/>
         </div>
     )
 };
