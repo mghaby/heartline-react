@@ -6,7 +6,7 @@ import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 
 
 function Calories() {
-    const [calories, setCalories] = useState(40)
+    const [calories, setCalories] = useState(0)
 
     const handleOnClickAdd = (e) => {
         setCalories((prev) => prev + e)

@@ -26,7 +26,8 @@ export default function FormDialog(props) {
   const handleSubmit = () => {
       const num = parseInt(number, 10)
       if (isNaN(num)) {
-          setOpen(false)
+          setNumber('')
+          alert('Input must be a numerical value')
       } else {
       props.onClick(num)
       setOpen(false);
@@ -61,7 +62,7 @@ export default function FormDialog(props) {
             Cancel
           </Button>
           <Button onClick={handleSubmit} color="primary">
-            Increment
+            Log
           </Button>
         </DialogActions>
       </Dialog>
