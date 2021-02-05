@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -96,6 +97,13 @@ function SignUp() {
       <div>
         <p>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
     <form>
+      <Grid
+       container
+       direction="column"
+       justify="space-evenly"
+       alignItems="center">
+
+
     <TextField
           required
           id="outlined"
@@ -188,7 +196,7 @@ function SignUp() {
         </TextField>
       <br/>
    </span>
-
+   <br/>
    <div>
      <TextField
      id="outlined-select-currency"
@@ -207,7 +215,7 @@ function SignUp() {
        </TextField>
        <br/>
    </div>
-
+   <br/>
     <div>
    <TextField
      id="outlined-select-currency"
@@ -225,12 +233,14 @@ function SignUp() {
        ))}
        </TextField>
        <br/>
+       
    </div>
-
+  
         <div>
           <Button variant="contained" size="large" color="primary" className={classes.margin}>
           Submit</Button>
         </div>
+        </Grid>
     </form>
     </div>
   );
