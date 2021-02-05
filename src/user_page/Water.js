@@ -5,21 +5,21 @@ import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 
 
-function Calories() {
-    const [calories, setCalories] = useState(0)
+function Water() {
+    const [water, setWater] = useState(0)
 
     const handleOnClickAdd = (e) => {
-        setCalories((prev) => prev + e)
+        setWater((prev) => prev + e)
     }
 
     const handleOnClickSubtract = (e) => {
-        setCalories((prev) => prev - e)
+        setWater((prev) => prev - e)
     }
 
     return (
       <div>
-          <h1>Calories</h1>
-          <div style={{width:200}}><Progress value={calories}/></div>
+          <h1>Water</h1>
+          <div style={{width:200}}><Progress value={water}/></div>
           <FormDialog value={AddSharpIcon} onClick={handleOnClickAdd}/> 
           <FormDialog value={RemoveSharpIcon} onClick={handleOnClickSubtract}/>
       </div>
@@ -29,4 +29,4 @@ function Calories() {
   }
   
   
-  export default Calories;
+  export default Water;
