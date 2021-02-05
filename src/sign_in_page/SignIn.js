@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,10 +74,19 @@ function SignIn() {
     //   </form>
     // </div>
     <form className={classes.root} noValidate autoComplete="off">
+      <Grid
+      container
+      direction="column"
+      justify="space-evenly"
+      alignItems="left">
+
       <TextField 
       id="outlined-username" 
       label="Username" 
       variant="outlined" />
+     
+     <br/>
+
       <TextField
           id="outlined-password-input"
           label="Password"
@@ -84,8 +94,10 @@ function SignIn() {
           autoComplete="current-password"
           variant="outlined"
           />
+          <br/>
         <Button variant="contained" size="large" color="primary" className={classes.margin}>
         Submit</Button>
+        </Grid>
     </form>
   )
 }
