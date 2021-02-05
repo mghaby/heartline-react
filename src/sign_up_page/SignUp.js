@@ -151,6 +151,16 @@ function SignUp() {
         <br/>
         <TextField
           id="outlined-number"
+          label="Height"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+        />
+        <br/>
+        <TextField
+          id="outlined-number"
           label="Goal Water"
           type="number"
           InputLabelProps={{
