@@ -1,8 +1,8 @@
-import Landing from './Landing';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import Index from './Index_Page/Index';
-import Settings from './Settings_Page/Settings';
+import Landing from './no_user_page/Landing';
+import SignIn from './sign_in_page/SignIn';
+import SignUp from './sign_up_page/SignUp';
+import Index from './user_page/Home';
+import Settings from './settings_page/Settings';
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,7 +16,7 @@ function Routes() {
       <div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Landing</Link>
           </li>
           <li>
             <Link to="/SignIn">SignIn</Link>
@@ -25,7 +25,7 @@ function Routes() {
             <Link to="/SignUp">SignUp</Link>
           </li>
           <li>
-            <Link to="/Index">Index</Link>
+            <Link to="/Index">Home</Link>
           </li>
           <li>
             <Link to="/Settings">Settings</Link>
