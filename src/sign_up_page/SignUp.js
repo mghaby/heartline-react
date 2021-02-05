@@ -95,7 +95,7 @@ function SignUp() {
 
   return (
       <div>
-        <p>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
+        <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
     <form>
       <Grid
        container
