@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import heartLineApi from './config/api';
+import getRandom from './services/userServices';
 
 // make all text in here black/grey
 
@@ -27,11 +27,8 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export async function getRandom(){
-    const response = await heartLineApi.get('/api/users/random')
-    console.log(response)
-};
-
+//   this is the basic syntax thing, from the res that you're console logging, we can add .age or whatever for that particular value
+getRandom().then((res) => console.log(res))
 
 function WeightLog(){
     const classes = useStyles();
