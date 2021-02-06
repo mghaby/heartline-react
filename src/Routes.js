@@ -2,7 +2,7 @@ import Landing from './no_user_page/Landing';
 import SignIn from './sign_in_page/SignIn';
 import SignUp from './sign_up_page/SignUp';
 import Index from './user_page/Home';
-import Settings from './Settings_Page/Settings';
+import Settings from './settings_page/Settings';
 
 import {
     BrowserRouter as Router,
