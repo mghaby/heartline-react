@@ -16,53 +16,71 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
   
   const classes = useStyles();
-  const [formData, setFormData] = useState({username: '', password: ''})
+  const initialFromState = {
+    username: "",
+    password: ""
+  }
+  const [formData, setFormData] = useState(initialFromState)
+
+  function handleOnChange(event) {
+    // console.log('update:', event.target.value)
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    })
+  }
   
-  const handleSubmit = () => {console.log(formData)}
+  function handleSubmit() {
+    setFormData({
+      username: "",
+      password: ""
+    })
+  }
 
-    return (
-      <form className={classes.root} noValidate autoComplete="off">
-        <Grid
-          container
-          direction="column"
-          justify="space-evenly"
-          alignItems="flex-start">
+  return (
+    <form className={classes.root} noValidate autoComplete="off">
+      <Grid
+        container
+        direction="column"
+        justify="space-evenly"
+        alignItems="flex-start">
 
-        <TextField 
-          id="outlined-username" 
-          label="Username" 
-          variant="outlined" 
-          name="username"
-          value={formData.username}
-          onChange={(e) => setFormData({...formData, username: e.target.value})}/>
-      
-        <br/>
+      <TextField 
+        id="outlined-username" 
+        label="Username" 
+        type="text"
+        variant="outlined" 
+        name="username"
+        value={formData.username}
+        onChange={handleOnChange}/>
+    
+      <br/>
 
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="outlined"
-          name="password"
-          value={formData.password}
-          onChange={(e) => setFormData({...formData, password: e.target.value})}
-          />
+      <TextField
+        id="outlined-password-input"
+        label="Password"
+        type="password"
+        autoComplete="current-password"
+        variant="outlined"
+        name="password"
+        value={formData.password}
+        onChange={handleOnChange}
+        />
 
-        <br/>
+      <br/>
 
-        <Button
-        variant="contained" 
-        size="large" 
-        color="primary" 
-        className={classes.margin} 
-        onClick={handleSubmit}>
-        Submit
-        </Button>
+      <Button
+      variant="contained" 
+      size="large" 
+      color="primary" 
+      className={classes.margin} 
+      onClick={handleSubmit}>
+      Submit
+      </Button>
 
-      </Grid>
-    </form >
-  )
+    </Grid>
+  </form >
+)
 }
 
 export default SignIn;

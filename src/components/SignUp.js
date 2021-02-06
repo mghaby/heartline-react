@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -80,6 +80,19 @@ function SignUp() {
   const [gender, setGender] = React.useState('male');
   const [activity, setActivity] = React.useState('Sedentary')
   const [social, setSocial] = React.useState('Yes')
+  const initialFormState = {
+    username: '',
+    password: '',
+    height: 0,
+    weight: 0,
+    goal_weight: 0,
+    age: 0,
+    public: false,
+    activity_level: {},
+    gender: {}
+  }
+
+  const[formData, setFormData] = useState(initialFormState)
 
   const handleChange = (event) => {
     setGender(event.target.value);
