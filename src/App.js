@@ -1,10 +1,10 @@
-import Nav from './Nav';
+import Nav from './components/Nav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Landing from './no_user_page/Landing';
-import SignIn from './sign_in_page/SignIn';
-import SignUp from './sign_up_page/SignUp';
-import Index from './user_page/Home';
-import Settings from './settings_page/Settings';
+import Landing from './components/Landing';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Index from './components/Home';
+import Settings from './components/Settings';
 
 function App() {
   return (

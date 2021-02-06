@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Progress from './components/Progess'
-import FormDialog from './components/Button_Form'
+import Progress from './Progess'
+import FormDialog from './Button_Form'
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 
