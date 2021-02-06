@@ -10,7 +10,6 @@ export default function RadioButtonsGroup({initialValue, buttons, radioValue, na
   function handleChange(event){
     setValue(event.target.value);
     radioValue({name}, event.target.value) 
-    // console.log({name}, event.target.value)
   };
 
   return (

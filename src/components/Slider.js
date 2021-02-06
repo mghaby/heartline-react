@@ -14,21 +14,21 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputSlider({initialValue, getValue, name, label, max, min}) {
+export default function InputSlider({initialValue, handleSlider, name, label, max, min}) {
   const classes = useStyles();
   const [value, setValue] = useState(initialValue);
 
-  useEffect(()=> getValue(value,{name}),[])
-  
+  useEffect(()=>{handleSlider(value,{name})},[value])
+
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
-    getValue(value, {name})
+    handleSlider(value, {name})
   };
 
 
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
-    getValue(value, {name})
+    handleSlider(value, {name})
   };
 
   const handleBlur = () => {

@@ -22,30 +22,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const conversions = { gender: [
+const gender =  [
   {
-    trueValue: 5,
-    value: 'male',
+    value: '5',
     label: 'Male'
   },
+  // 5
   {
-    trueValue: -161,
-    value: 'female',
+    value: '-161',
     label: 'Female'
   }
-],
-public: [
+  // -161
+]
+const social = [
   {
-    trueValue: 'true',
-    value: 'true',
-    label: "Public",
-  },
-  {
-    trueValue: 'false',
     value: 'false',
     label: "Private",
   },
-]};
+  {
+    value: 'true',
+    label: "Public",
+  }
+];
 
 // const activities = [
 //   {
@@ -95,19 +93,18 @@ function SignUp() {
     passwordConfirm: '',
     weight: 65,
     height: 175,
-    age: 30,    
-    gender: 5,
+    age: '30',    
+    gender: '5',
     activity_level: 1,
     weight_goal: 65,
     water_goal: 2000,   
-    public: false,
+    public: 'false',
 
   }
 
   const[formData, setFormData] = useState(initialFormState)
 
   function handleOnChange(event) {
-    console.log('update:', event.target.value)
     setFormData({
       ...formData,
       [event.target.name]: event.target.value
@@ -119,7 +116,7 @@ function SignUp() {
     
   }
 
-  function getValue(value, target) {
+  function handleSlider(value, target) {
     setFormData({
       ...formData,
       [target.name]: value
@@ -131,7 +128,6 @@ function SignUp() {
       ...formData,
       [target.name]: value
     })
-    console.log(conversions[value].trueValue)
   }
 
   return (
@@ -181,26 +177,21 @@ function SignUp() {
       <br/>
       <h1>About Me</h1>
       <br/>
-      <InputSlider initialValue={formData.weight} getValue={getValue} name={'weight'} label={'Weight'} max={450} min={1}/>
+      <InputSlider initialValue={formData.weight} handleSlider={handleSlider} name={'weight'} label={'Weight'} max={450} min={1}/>
       <br/>
-      <InputSlider initialValue={formData.height} getValue={getValue} name={'height'} label={'Height'} max={280} min={50}/> 
+      <InputSlider initialValue={formData.height} handleSlider={handleSlider} name={'height'} label={'Height'} max={280} min={50}/> 
       <br/>
-      <InputSlider initialValue={formData.age} getValue={getValue} name={'age'} label={'Age'} max={80} min={15}/>
+      <InputSlider initialValue={formData.age} handleSlider={handleSlider} name={'age'} label={'Age'} max={80} min={15}/>
       <br/>
-      <RadioButtonsGroup initialValue={'male'} radioValue={handleRadio} name={'gender'} buttons={conversions.gender}/>
+      <RadioButtonsGroup initialValue={formData.gender} radioValue={handleRadio} name={'gender'} buttons={gender}/>
       <br/>
       <h1>My Goals</h1>
       <br/>
-      <InputSlider initialValue={formData.weight_goal} getValue={getValue} name={'weight_goal'} label={'Weight'} max={280} min={50}/>
+      <InputSlider initialValue={formData.weight_goal} handleSlider={handleSlider} name={'weight_goal'} label={'Weight'} max={280} min={50}/>
       <br/>
-    <InputSlider initialValue={formData.water_goal} getValue={getValue} name={'water_goal'} label={'Water'} max={4000} min={250}/>
+    <InputSlider initialValue={formData.water_goal} handleSlider={handleSlider} name={'water_goal'} label={'Water'} max={4000} min={250}/>
       <br/>
-      <RadioButtonsGroup initialValue={'false'} radioValue={handleRadio} name={'public'} buttons={conversions.public}/>
-        <span>
-
-        <br/>
-
-        </span>
+      <RadioButtonsGroup initialValue={formData.public} radioValue={handleRadio} name={'public'} buttons={social}/>
 
         <br/>
 
@@ -223,27 +214,6 @@ function SignUp() {
        <br/>
    </div> */}
 
-   <br/>
-    <div>
-   {/* <TextField
-     id="outlined-select-currency"
-     select
-     label="Select Public Setting"
-    //  value={social}
-    //  onChange={'handleChangeSocial'}
-     helperText="Would You Like Your Progress Made Public?"
-     varient="outlined"
-     >
-       {socials.map((option) => (
-         <MenuItem key={option.value} value={option.value}>
-           {option.label}
-         </MenuItem>
-       ))}
-       </TextField> */}
-       <br/>
-       
-   </div>
-  
         <div>
           <Button
             variant="contained" 
