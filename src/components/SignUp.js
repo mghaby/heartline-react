@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputSlider from './Slider'
 import RadioButtonsGroup from './Radio'
+import NativeSelects from './Select'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const gender =  [
+const genders =  [
   {
     value: '5',
     label: 'Male'
@@ -45,43 +46,36 @@ const social = [
   }
 ];
 
-// const activities = [
-//   {
-//     id: 1.2,
-//     value: 1.2,
-//     label: "Sedentary - Little or no excersise",
-//   },
-//   {
-//     id: 1.375,
-//     value: 1.375,
-//     label: "Light - Exercise 1-3 times/week",
-//   },
-//   {
-//     id: 1.465,
-//     value: 1.465,
-//     label: "Moderate - Exercise or intense 4-5 times/week",
-//   },
-//   {
-//     id: 1.55,
-//     value: 1.55,
-//     label: "Active - Daily exercise or intense exercise 3-4 times/week",
-//   },
-//   {
-//     id: 1.725,
-//     value: 1.725,
-//     label: "Very Active - Intense exercise 6-7 times/week",
-//   },
-//   {
-//     id: 1.9,
-//     value: 1.9,
-//     label: "Extra Active - Very intense exercise daily, or phyiscal job",
-//   },
-//   {
-//     id: 1.95,
-//     value: 1.95,
-//     label: "Athlete",
-//   }
-// ]
+const levels = [
+  {
+    value: '1.2',
+    label: "Sedentary: Little or no excersise",
+  },
+  {
+    value: '1.375',
+    label: "Light: Exercise 1-3 times/week",
+  },
+  {
+    value: '1.465',
+    label: "Moderate: Exercise or intense 4-5 times/week",
+  },
+  {
+    value: '1.55',
+    label: "Active: Daily exercise or intense exercise 3-4 times/week",
+  },
+  {
+    value:'1.725',
+    label: "Very Active: Intense exercise 6-7 times/week",
+  },
+  {
+    value: '1.9',
+    label: "Extra Active: Very intense exercise daily, or phyiscal job",
+  },
+  {
+    value: '1.95',
+    label: "Athlete",
+  }
+]
 
 function SignUp() {
 
@@ -93,9 +87,9 @@ function SignUp() {
     passwordConfirm: '',
     weight: 65,
     height: 175,
-    age: '30',    
+    age: 30,    
     gender: '5',
-    activity_level: 1,
+    activity_level: '1.2',
     weight_goal: 65,
     water_goal: 2000,   
     public: 'false',
@@ -116,19 +110,19 @@ function SignUp() {
     
   }
 
-  function handleSlider(value, target) {
+  function handleGraphics(target, value) {
     setFormData({
       ...formData,
       [target.name]: value
     })
   }
 
-  function handleRadio(target, value){
-    setFormData({
-      ...formData,
-      [target.name]: value
-    })
-  }
+  // function handleRadio(target, value){
+  //   setFormData({
+  //     ...formData,
+  //     [target.name]: value
+  //   })
+  // }
 
   return (
     <div>
@@ -139,9 +133,11 @@ function SignUp() {
        direction="column"
        justify="space-evenly"
        alignItems="center">
-         
+
     <h1>My Account </h1>
+
     <br/>
+
     <TextField
           required
           id="username"
@@ -150,9 +146,10 @@ function SignUp() {
           variant="outlined" 
           name="username"
           value={formData.username}
-          onChange={handleOnChange}
-        />
+          onChange={handleOnChange}/>
+
       <br/>
+
       <TextField
           id="password"
           label="Password"
@@ -161,9 +158,10 @@ function SignUp() {
           variant="outlined"
           name="password"
           value={formData.password}
-          onChange={handleOnChange}
-          />
+          onChange={handleOnChange}/>
+
       <br/>
+
       <TextField
           id="passwordConfirm"
           label="Password Confirmation"
@@ -172,60 +170,99 @@ function SignUp() {
           variant="outlined"
           name="passwordConfirm"
           value={formData.passwordConfirm}
-          onChange={handleOnChange}
-          />
+          onChange={handleOnChange}/>
+
       <br/>
+
       <h1>About Me</h1>
+
       <br/>
-      <InputSlider initialValue={formData.weight} handleSlider={handleSlider} name={'weight'} label={'Weight'} max={450} min={1}/>
+
+      <InputSlider
+      initialValue={formData.weight} 
+      handleGraphics={handleGraphics} 
+      name={'weight'} 
+      label={'Weight'} 
+      max={450} 
+      min={1}/>
+
       <br/>
-      <InputSlider initialValue={formData.height} handleSlider={handleSlider} name={'height'} label={'Height'} max={280} min={50}/> 
+
+      <InputSlider
+      initialValue={formData.height} 
+      handleGraphics={handleGraphics} 
+      name={'height'} 
+      label={'Height'} 
+      max={280} 
+      min={50}/> 
+
       <br/>
-      <InputSlider initialValue={formData.age} handleSlider={handleSlider} name={'age'} label={'Age'} max={80} min={15}/>
+
+      <InputSlider 
+      initialValue={formData.age} 
+      handleGraphics={handleGraphics} 
+      name={'age'} 
+      label={'Age'} 
+      max={80} 
+      min={15}/>
+
       <br/>
-      <RadioButtonsGroup initialValue={formData.gender} radioValue={handleRadio} name={'gender'} buttons={gender}/>
+
+      <RadioButtonsGroup 
+      initialValue={formData.gender} 
+      handleGraphics={handleGraphics} 
+      name={'gender'} 
+      buttons={genders}/>
+
       <br/>
+
+      <NativeSelects initialValue={formData.activity_level} levels={levels} name={'activity_level'} handleGraphics={handleGraphics}/>
+
+      <br/>
+
       <h1>My Goals</h1>
-      <br/>
-      <InputSlider initialValue={formData.weight_goal} handleSlider={handleSlider} name={'weight_goal'} label={'Weight'} max={280} min={50}/>
-      <br/>
-    <InputSlider initialValue={formData.water_goal} handleSlider={handleSlider} name={'water_goal'} label={'Water'} max={4000} min={250}/>
-      <br/>
-      <RadioButtonsGroup initialValue={formData.public} radioValue={handleRadio} name={'public'} buttons={social}/>
 
-        <br/>
+      <br/>
 
-   {/* <div>
-     <TextField
-     id="outlined-select-currency"
-     select
-     label="Select Activity Level"
-    //  value={activity}
-    //  onChange={handleChangeActivity}
-     helperText="Please Select your Daily Activity Level"
-     varient="outlined"
-     >
-       {activities.map((option) => (
-         <MenuItem key={option.value} value={option.value}>
-           {option.label}
-         </MenuItem>
-       ))}
-       </TextField>
-       <br/>
-   </div> */}
+      <InputSlider 
+      initialValue={formData.weight_goal} 
+      handleGraphics={handleGraphics} 
+      name={'weight_goal'} 
+      label={'Weight'} 
+      max={280} 
+      min={50}/>
 
-        <div>
-          <Button
-            variant="contained" 
-            size="large" color="primary" 
-            className={classes.margin} 
-            onClick={handleSubmit}>
-            Submit
-          </Button>
-        </div>
+      <br/>
+
+      <InputSlider 
+      initialValue={formData.water_goal} 
+      handleGraphics={handleGraphics} 
+      name={'water_goal'} 
+      label={'Water'} 
+      max={4000} 
+      min={250}/>
+
+      <br/>
+
+      <RadioButtonsGroup 
+      initialValue={formData.public} 
+      handleGraphics={handleGraphics} 
+      name={'public'} 
+      buttons={social}/>
+
+      <br/>
+
+      <Button
+        variant="contained" 
+        size="large" color="primary" 
+        className={classes.margin} 
+        onClick={handleSubmit}>
+        Submit
+      </Button>
+
         </Grid>
-    </form>
-    </div>
+  </form>
+  </div>
   );
 }
 
