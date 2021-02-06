@@ -48,7 +48,6 @@ function SignIn() {
       <TextField 
         id="outlined-username" 
         label="Username" 
-        type="text"
         variant="outlined" 
         name="username"
         value={formData.username}
