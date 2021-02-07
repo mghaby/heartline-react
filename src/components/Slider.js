@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     width: 250,
   },
   input: {
-    width: 42,
+    width: 70,
   },
 });
 
@@ -22,7 +22,7 @@ export default function InputSlider({initialValue, handleGraphics, name, label, 
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
-    handleGraphics({name}, value)
+    {handleGraphics({name}, value)}
   };
 
 
@@ -32,10 +32,10 @@ export default function InputSlider({initialValue, handleGraphics, name, label, 
   };
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    if (value < {min}) {
+      setValue({min});
+    } else if (value > {max}) {
+      setValue({max});
     }
   };
 

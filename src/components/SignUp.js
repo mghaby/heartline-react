@@ -28,12 +28,10 @@ const genders =  [
     value: '5',
     label: 'Male'
   },
-  // 5
   {
     value: '-161',
     label: 'Female'
   }
-  // -161
 ]
 const social = [
   {
@@ -64,7 +62,7 @@ const levels = [
     label: "Active: Daily exercise or intense exercise 3-4 times/week",
   },
   {
-    value:'1.725',
+    value: '1.725',
     label: "Very Active: Intense exercise 6-7 times/week",
   },
   {
@@ -88,8 +86,8 @@ function SignUp() {
     weight: 65,
     height: 175,
     age: 30,    
-    gender: '5',
-    activity_level: '1.2',
+    gender: 5,
+    activity_level: 1.2,
     weight_goal: 65,
     water_goal: 2000,   
     public: 'false',
@@ -107,22 +105,15 @@ function SignUp() {
   
   function handleSubmit() {
     console.log(formData)
-    
   }
 
   function handleGraphics(target, value) {
+    const newValue = isNaN(value) ? value : parseFloat(value)
     setFormData({
       ...formData,
-      [target.name]: value
+      [target.name]: newValue
     })
   }
-
-  // function handleRadio(target, value){
-  //   setFormData({
-  //     ...formData,
-  //     [target.name]: value
-  //   })
-  // }
 
   return (
     <div>
@@ -209,14 +200,17 @@ function SignUp() {
       <br/>
 
       <RadioButtonsGroup 
-      initialValue={formData.gender} 
+      initialValue={formData.gender.toString()} 
       handleGraphics={handleGraphics} 
       name={'gender'} 
       buttons={genders}/>
 
       <br/>
 
-      <NativeSelects initialValue={formData.activity_level} levels={levels} name={'activity_level'} handleGraphics={handleGraphics}/>
+      <NativeSelects
+      initialValue={formData.activity_level} 
+      levels={levels} name={'activity_level'} 
+      handleGraphics={handleGraphics}/>
 
       <br/>
 
