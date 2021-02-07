@@ -6,7 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import InputSlider from './Slider'
 import RadioButtonsGroup from './Radio'
 import NativeSelects from './Select'
-
+import {signUp} from '../services/userServices'
+import {useGlobalState} from '../utils/stateContext'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,9 +78,7 @@ const levels = [
 ]
 
 function SignUp() {
-
   const classes = useStyles();
-
   const initialFormState = {
     username: '',
     password: '',
@@ -93,27 +93,53 @@ function SignUp() {
     public: 'false',
 
   }
-
-  const[formData, setFormData] = useState(initialFormState)
+  const[formState, setFormState] = useState(initialFormState)
+  const {dispatch} = useGlobalState()
 
   function handleOnChange(event) {
-    setFormData({
-      ...formData,
+    setFormState({
+      ...formState,
       [event.target.name]: event.target.value
     })
-  }
-  
-  function handleSubmit() {
-    console.log(formData)
   }
 
   function handleGraphics(target, value) {
     const newValue = isNaN(value) ? value : parseFloat(value)
-    setFormData({
-      ...formData,
+    setFormState({
+      ...formState,
       [target.name]: newValue
     })
   }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    console.log(formState)
+    signUp(formState)
+    .then((user) => {
+      dispatch({type: 'setLoggedInUser', data: user.username})
+      useHistory.push('/')
+    })
+  }
+
+  
+
+	// const {dispatch} = useGlobalState()
+	// let history = useHistory()
+
+	// function handleChange(event) {
+	// 	setFormState({
+	// 		...formState,
+	// 		[event.target.name]: event.target.value
+	// 	})
+	// }
+	// function handleRegister(event) {
+	// 	event.preventDefault()
+	// 	signUp(formState)
+	// 	.then((user) => {
+	// 		dispatch({type: 'setLoggedInUser', data: user.username})
+	// 		history.push('/jokes')
+	// 	})
+	// }
 
   return (
     <div>
@@ -136,7 +162,7 @@ function SignUp() {
           type="text"
           variant="outlined" 
           name="username"
-          value={formData.username}
+          value={formState.username}
           onChange={handleOnChange}/>
 
       <br/>
@@ -148,7 +174,7 @@ function SignUp() {
           autoComplete="current-password"
           variant="outlined"
           name="password"
-          value={formData.password}
+          value={formState.password}
           onChange={handleOnChange}/>
 
       <br/>
@@ -160,7 +186,7 @@ function SignUp() {
           autoComplete="current-password"
           variant="outlined"
           name="passwordConfirm"
-          value={formData.passwordConfirm}
+          value={formState.passwordConfirm}
           onChange={handleOnChange}/>
 
       <br/>
@@ -170,7 +196,7 @@ function SignUp() {
       <br/>
 
       <InputSlider
-      initialValue={formData.weight} 
+      initialValue={formState.weight} 
       handleGraphics={handleGraphics} 
       name={'weight'} 
       label={'Weight'} 
@@ -180,7 +206,7 @@ function SignUp() {
       <br/>
 
       <InputSlider
-      initialValue={formData.height} 
+      initialValue={formState.height} 
       handleGraphics={handleGraphics} 
       name={'height'} 
       label={'Height'} 
@@ -190,7 +216,7 @@ function SignUp() {
       <br/>
 
       <InputSlider 
-      initialValue={formData.age} 
+      initialValue={formState.age} 
       handleGraphics={handleGraphics} 
       name={'age'} 
       label={'Age'} 
@@ -200,7 +226,7 @@ function SignUp() {
       <br/>
 
       <RadioButtonsGroup 
-      initialValue={formData.gender.toString()} 
+      initialValue={formState.gender.toString()} 
       handleGraphics={handleGraphics} 
       name={'gender'} 
       buttons={genders}/>
@@ -208,7 +234,7 @@ function SignUp() {
       <br/>
 
       <NativeSelects
-      initialValue={formData.activity_level} 
+      initialValue={formState.activity_level} 
       levels={levels} name={'activity_level'} 
       handleGraphics={handleGraphics}/>
 
@@ -219,7 +245,7 @@ function SignUp() {
       <br/>
 
       <InputSlider 
-      initialValue={formData.weight_goal} 
+      initialValue={formState.weight_goal} 
       handleGraphics={handleGraphics} 
       name={'weight_goal'} 
       label={'Weight'} 
@@ -229,7 +255,7 @@ function SignUp() {
       <br/>
 
       <InputSlider 
-      initialValue={formData.water_goal} 
+      initialValue={formState.water_goal} 
       handleGraphics={handleGraphics} 
       name={'water_goal'} 
       label={'Water'} 
@@ -239,7 +265,7 @@ function SignUp() {
       <br/>
 
       <RadioButtonsGroup 
-      initialValue={formData.public} 
+      initialValue={formState.public} 
       handleGraphics={handleGraphics} 
       name={'public'} 
       buttons={social}/>
