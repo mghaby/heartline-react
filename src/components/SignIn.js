@@ -40,7 +40,7 @@ function SignIn() {
     .then(({username, jwt}) => {
       console.log(username, jwt)
       sessionStorage.setItem('token', jwt)
-      sessionStroage.setItem('user', username)
+      sessionStorage.setItem('user', username)
       dispatch({type: 'setLoggedInUser', data: username})
       dispatch({type: 'setToken', data: jwt})
       useHistory.push('/Home')

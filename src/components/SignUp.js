@@ -116,8 +116,8 @@ function SignUp() {
     console.log(formState)
     signUp(formState)
     .then((data) => {
-      sessionStorage.setItem('token', jwt)
-      sessionStroage.setItem('user', username)
+      sessionStorage.setItem('token', data.jwt)
+      sessionStorage.setItem('user', data.username)
       dispatch({type: 'setLoggedInUser', data: data.username})
       useHistory.push('/')
     })
