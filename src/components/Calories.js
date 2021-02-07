@@ -5,15 +5,15 @@ import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 
 
-function Calories() {
+function Calories({ addProgress, subtractProgess }) {
     const [calories, setCalories] = useState(0)
 
-    const handleOnClickAdd = (e) => {
-        setCalories((prev) => prev + e)
+    const handleOnClickAdd = (event) => {
+        addProgress(event)
     }
 
-    const handleOnClickSubtract = (e) => {
-        setCalories((prev) => prev - e)
+    const handleOnClickSubtract = (event) => {
+        subtractProgess(event)
     }
 
     return (

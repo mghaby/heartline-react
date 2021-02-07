@@ -13,8 +13,8 @@ function App() {
 
   const initialState = {
     users: [],
-    loggedInUser: null,
-		auth: {token: null}
+    loggedInUser: sessionStorage.getItem('user') || null,
+		auth: {token:sessionStorage.getItem('token') || null}
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)

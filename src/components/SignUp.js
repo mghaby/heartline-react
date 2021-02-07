@@ -115,32 +115,13 @@ function SignUp() {
     event.preventDefault()
     console.log(formState)
     signUp(formState)
-    .then((user) => {
-      dispatch({type: 'setLoggedInUser', data: user.username})
+    .then((data) => {
+      sessionStorage.setItem('token', jwt)
+      sessionStroage.setItem('user', username)
+      dispatch({type: 'setLoggedInUser', data: data.username})
       useHistory.push('/')
     })
   }
-
-  
-
-	// const {dispatch} = useGlobalState()
-	// let history = useHistory()
-
-	// function handleChange(event) {
-	// 	setFormState({
-	// 		...formState,
-	// 		[event.target.name]: event.target.value
-	// 	})
-	// }
-	// function handleRegister(event) {
-	// 	event.preventDefault()
-	// 	signUp(formState)
-	// 	.then((user) => {
-	// 		dispatch({type: 'setLoggedInUser', data: user.username})
-	// 		history.push('/jokes')
-	// 	})
-	// }
-
   return (
     <div>
         <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
