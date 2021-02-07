@@ -113,7 +113,6 @@ function SignUp() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(formState)
     signUp(formState)
     .then((data) => {
       sessionStorage.setItem('token', data.jwt)

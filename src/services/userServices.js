@@ -7,7 +7,7 @@ export async function signUp(data) {
 }
 
 // random call for users with public = true
-export default async function getRandom(){
+export async function getRandom(){
     const response = await heartLineApi.get('/api/users/random')
     return response.data
 };
@@ -15,7 +15,7 @@ export default async function getRandom(){
 // show user with id
 // might need to change to username instead of id
 export async function getUser(id) {
-    const response = await heartLineApi.get(`api/users/${id}`)
+    const response = await heartLineApi.get(`/api/users/${id}`)
     return response.data
 };
 
@@ -44,3 +44,9 @@ export async function signIn(data) {
     const response = await heartLineApi.post('/api/users/sign_in', data)
     return response.data
 }
+
+
+// default thing
+export default async function defExp(e){
+    console.log(e)
+};
