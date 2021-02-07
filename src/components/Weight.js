@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import FormDialog from './components/Button_Form'
+import FormDialog from './Button_Form'
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 

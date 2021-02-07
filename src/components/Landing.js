@@ -1,5 +1,5 @@
 import '../index.css';
-import WeightLog from '../WeightLog';
+import WeightLog from './WeightLog';
 
 
 function Landing() {

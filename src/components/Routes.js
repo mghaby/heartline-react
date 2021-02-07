@@ -1,8 +1,8 @@
-import Landing from './no_user_page/Landing';
-import SignIn from './sign_in_page/SignIn';
-import SignUp from './sign_up_page/SignUp';
-import Index from './user_page/Home';
-import Settings from './Settings_Page/Settings';
+import Landing from './Landing';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import Index from './Home';
+import Settings from './Settings';
 
 import {
     BrowserRouter as Router,
