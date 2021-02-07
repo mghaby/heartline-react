@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import {signIn} from '../services/userServices';
+import {useGlobalState} from '../utils/stateContext'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,21 +23,27 @@ function SignIn() {
     username: "",
     password: ""
   }
-  const [formData, setFormData] = useState(initialFromState)
+  const [formState, setFormState] = useState(initialFromState)
+  const {dispatch} = useGlobalState()
 
   function handleOnChange(event) {
     // console.log('update:', event.target.value)
-    setFormData({
-      ...formData,
+    setFormState({
+      ...formState,
       [event.target.name]: event.target.value
     })
   }
   
-  function handleSubmit() {
-    setFormData({
-      username: "",
-      password: ""
+  function handleSubmit(event) {
+    event.preventDefault()
+    signIn(formState)
+    .then(({username, jwt}) => {
+      console.log(username, jwt)
+      dispatch({type: 'setLoggedInUser', data: username})
+      dispatch({type: 'setToken', data: jwt})
+      useHistory.push('/Home')
     })
+    .catch((error) => console.log(error))
   }
 
   return (
@@ -50,7 +59,7 @@ function SignIn() {
         label="Username" 
         variant="outlined" 
         name="username"
-        value={formData.username}
+        value={formState.username}
         onChange={handleOnChange}/>
     
       <br/>
@@ -62,7 +71,7 @@ function SignIn() {
         autoComplete="current-password"
         variant="outlined"
         name="password"
-        value={formData.password}
+        value={formState.password}
         onChange={handleOnChange}
         />
 
