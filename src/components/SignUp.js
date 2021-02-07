@@ -120,7 +120,7 @@ function SignUp() {
       dispatch({type: 'setLoggedInUser', data: data.username})
       useHistory.push('/')
     })
-    console.log()
+    console.log(formState)
   }
   return (
     <div>

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 //   this is the basic syntax thing, from the res that you're console logging, we can add .age or whatever for that particular value
-getRandom().then((res) => console.log(res))
+// getRandom().then((res) => console.log(res))
 
 function WeightLog(){
     const classes = useStyles();

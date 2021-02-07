@@ -1,36 +1,30 @@
 function reducer(state, action) {
     switch(action.type) {
-        case 'setUsers':{
+        case 'setUser':{
 			return {
 				...state,
-				users: action.data
+				user: action.data
 			}
 		}
-		case 'addUser': {
+		case 'deleteUser': {
+			const updatedUsers = state.users.filter((user) => {
+				return user.id !== parseInt(action.data)
+			})
 			return {
 				...state,
-				users: [action.data, ...state.jokes]
+				users: updatedUsers
 			}
 		}
-		// case 'deleteUser': {
-		// 	const updatedUsers = state.users.filter((user) => {
-		// 		return user.id !== parseInt(action.data)
-		// 	})
-		// 	return {
-		// 		...state,
-		// 		users: updatedUsers
-		// 	}
-		// }
-		// case 'updateUser': {
-		// 	const user = state.users.find((user) => user.id == action.data.id)
-		// 	const theRest = state.users.filter((user) => user.id != action.data.id)
-		// 	const updatedUser = Object.assign(user, action.data)
-		// 	return {
-		// 		...state,
-		// 		users: [updatedUser, ...theRest]
-		// 	}
+		case 'updateUser': {
+			const user = state.users.find((user) => user.id == action.data.id)
+			const theRest = state.users.filter((user) => user.id != action.data.id)
+			const updatedUser = Object.assign(user, action.data)
+			return {
+				...state,
+				users: [updatedUser, ...theRest]
+			}
 
-		// }
+		}
 		case 'setLoggedInUser': {
 			return {
 				...state,
