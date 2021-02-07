@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Nav from './components/Nav';
 import Landing from './components/Landing';
@@ -8,18 +8,25 @@ import Index from './components/Home';
 import Settings from './components/Settings';
 import {StateContext} from './utils/stateContext'
 import reducer from './utils/stateReducer'
+import {getUser} from './services/userServices'
 
 function App() {
 
   const initialState = {
-    users: [],
+    user: {},
     loggedInUser: sessionStorage.getItem('user') || null,
 		auth: {token:sessionStorage.getItem('token') || null}
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)
+  const {loggerInUser} = store
 
-  
+  useEffect(() => {
+		getUser(loggerInUser)
+		.then((user) => dispatch({type: 'setUser', data: user}))
+		.catch((error) => console.log(error))
+	},[loggerInUser])
+
 
   return (
     <StateContext.Provider value={{store, dispatch}}>

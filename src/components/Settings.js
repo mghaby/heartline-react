@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
+import InputSlider from './Slider'
+import RadioButtonsGroup from './Radio'
+import NativeSelects from './Select'
+import {updateUser} from '../services/userServices'
+import {useGlobalState} from '../utils/stateContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,81 +24,109 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const genders = [
+const genders =  [
   {
-    value: 5,
-    label: 'Male',
+    value: '5',
+    label: 'Male'
   },
   {
-    value: -161,
-    label: 'Female',
+    value: '-161',
+    label: 'Female'
+  }
+]
+const social = [
+  {
+    value: 'false',
+    label: "Private",
+  },
+  {
+    value: 'true',
+    label: "Public",
   }
 ];
 
-const activities = [
+const levels = [
   {
-    value: 1.2,
-    label: "Sedentary - Little or no excersise",
+    value: '1.2',
+    label: "Sedentary: Little or no excersise",
   },
   {
-    value: 1.375,
-    label: "Light - Exercise 1-3 times/week",
+    value: '1.375',
+    label: "Light: Exercise 1-3 times/week",
   },
   {
-    value: 1.465,
-    label: "Moderate - Exercise or intense 4-5 times/week",
+    value: '1.465',
+    label: "Moderate: Exercise or intense 4-5 times/week",
   },
   {
-    value: 1.55,
-    label: "Active - Daily exercise or intense exercise 3-4 times/week",
+    value: '1.55',
+    label: "Active: Daily exercise or intense exercise 3-4 times/week",
   },
   {
-    value: 1.725,
-    label: "Very Active - Intense exercise 6-7 times/week",
+    value: '1.725',
+    label: "Very Active: Intense exercise 6-7 times/week",
   },
   {
-    value: 1.9,
-    label: "Extra Active - Very intense exercise daily, or phyiscal job",
+    value: '1.9',
+    label: "Extra Active: Very intense exercise daily, or phyiscal job",
   },
   {
-    value: 1.95,
+    value: '1.95',
     label: "Athlete",
   }
 ]
 
-const socials = [
-  {
-    value: true,
-    label: "Yes",
-  },
-  {
-    value: false,
-    label: "No",
-  },
-]
+export default function Settings() {
+  const {store, dispatch} = useGlobalState()
+	const {user, loggedInUser} = store
 
+  const initialFormState = {user}
 
-function Settings() {
-  const classes = useStyles();
-  const [gender, setGender] = React.useState('male');
-  const [activity, setActivity] = React.useState('Sedentary')
-  const [social, setSocial] = React.useState('Yes')
-
-  const handleChange = (event) => {
-    setGender(event.target.value);
-  };
+	const [formState, setFormState] = useState(initialFormState)
   
-  const handleChangeActivity = (event) => {
-    setActivity(event.target.value);
-  };
 
-  const handleChangeSocial = (event) => {
-    setSocial(event.target.value);
-  };
+  const classes = useStyles();
 
+  // const[formState, setFormState] = useState(initialFormState)
+
+  function handleOnChange(event) {
+    setFormState({
+      ...formState,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  function handleGraphics(target, value) {
+    const newValue = JSON.parse(value)
+    setFormState({
+      ...formState,
+      [target.name]: newValue
+    })
+  }
+
+  // function handleSubmit(event) {
+  //   event.preventDefault()
+  //   updateUser(loggedInUser)
+  //   .then((data) => {
+  //     sessionStorage.setItem('token', data.jwt)
+  //     sessionStorage.setItem('user', data.username)
+  //     dispatch({type: 'updateUser', data: data.username})
+  //     useHistory.push('/')
+  //   })
+  //   console.log(formState)
+  // }
+
+  function handleSubmit(event) {
+		event.preventDefault()
+		if(loggedInUser) {
+			updateUser( {id: loggedInUser, ...formState})
+			.then(() => {
+				dispatch({type: 'updateUser', data: {id: loggedInUser, ...formState}})
+			})
+		}}
   return (
-      <div>
-        <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Edit any of the fields below to update your details!</p>
+    <div>
+        <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
     <form>
       <Grid
        container
@@ -103,132 +134,125 @@ function Settings() {
        justify="space-evenly"
        alignItems="center">
 
+    <h1>My Account </h1>
+
+    <br/>
+
       <TextField
-          id="outlined-password-input"
-          label="Update Password"
+          id="password"
+          label="Password"
           type="password"
           autoComplete="current-password"
           variant="outlined"
-          />
+          name="password"
+          value={formState.password}
+          onChange={handleOnChange}/>
+
       <br/>
+
       <TextField
-          id="outlined-number"
-          label="Update Current Weight"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          id="passwordConfirm"
+          label="Password Confirmation"
+          type="password"
+          autoComplete="current-password"
           variant="outlined"
-        />
-        <br/>
-        <TextField
-          id="outlined-number"
-          label="Update Goal Weight"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-        <br/>
-        <TextField
-          id="outlined-number"
-          label="Update Age"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-        <br/>
-        <TextField
-          id="outlined-number"
-          label="Update Height"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-        <br/>
-        <TextField
-          id="outlined-number"
-          label="Update Goal Water"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-        <br/>
+          name="password_confirmation"
+          value={formState.password_confirmation}
+          onChange={handleOnChange}/>
 
-        <span>
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Update Gender"
-          value={gender}
-          onChange={handleChange}
-          helperText="Please select your Gender"
-          variant="outlined"
-        >
-          {genders.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
       <br/>
-   </span>
-   <br/>
-   <div>
-     <TextField
-     id="outlined-select-currency"
-     select
-     label="Update Activity Level"
-     value={activity}
-     onChange={handleChangeActivity}
-     helperText="Please Select your Daily Activity Level"
-     varient="outlined"
-     >
-       {activities.map((option) => (
-         <MenuItem key={option.value} value={option.value}>
-           {option.label}
-         </MenuItem>
-       ))}
-       </TextField>
-       <br/>
-   </div>
-   <br/>
-    <div>
-   <TextField
-     id="outlined-select-currency"
-     select
-     label="Update Public Setting"
-     value={social}
-     onChange={handleChangeSocial}
-     helperText="Would You Like Your Progress Made Public?"
-     varient="outlined"
-     >
-       {socials.map((option) => (
-         <MenuItem key={option.value} value={option.value}>
-           {option.label}
-         </MenuItem>
-       ))}
-       </TextField>
-       <br/>
-       
-   </div>
-  
-        <div>
-          <Button variant="contained" size="large" color="primary" className={classes.margin}>
-          Submit</Button>
-        </div>
+
+      <h1>About Me</h1>
+
+      <br/>
+
+      <InputSlider
+      initialValue={formState.weight} 
+      handleGraphics={handleGraphics} 
+      name={'weight'} 
+      label={'Weight'} 
+      max={450} 
+      min={1}/>
+
+      <br/>
+
+      <InputSlider
+      initialValue={formState.height} 
+      handleGraphics={handleGraphics} 
+      name={'height'} 
+      label={'Height'} 
+      max={280} 
+      min={50}/> 
+
+      <br/>
+
+      <InputSlider 
+      initialValue={formState.age} 
+      handleGraphics={handleGraphics} 
+      name={'age'} 
+      label={'Age'} 
+      max={80} 
+      min={15}/>
+
+      <br/>
+
+      <RadioButtonsGroup 
+      initialValue={formState.mf.toString()} 
+      handleGraphics={handleGraphics} 
+      name={'mf'} 
+      buttons={genders}/>
+
+      <br/>
+
+      <NativeSelects
+      initialValue={formState.activity_level} 
+      levels={levels} name={'activity_level'} 
+      handleGraphics={handleGraphics}/>
+
+      <br/>
+
+      <h1>My Goals</h1>
+
+      <br/>
+
+      <InputSlider 
+      initialValue={formState.goal_weight} 
+      handleGraphics={handleGraphics} 
+      name={'goal_weight'} 
+      label={'Weight'} 
+      max={280} 
+      min={50}/>
+
+      <br/>
+
+      <InputSlider 
+      initialValue={formState.water} 
+      handleGraphics={handleGraphics} 
+      name={'water'} 
+      label={'Water'} 
+      max={4000} 
+      min={250}/>
+
+      <br/>
+
+      <RadioButtonsGroup 
+      initialValue={formState.public.toString()} 
+      handleGraphics={handleGraphics} 
+      name={'public'} 
+      buttons={social}/>
+
+      <br/>
+
+      <Button
+        variant="contained" 
+        size="large" color="primary" 
+        className={classes.margin} 
+        onClick={handleSubmit}>
+        Submit
+      </Button>
+
         </Grid>
-    </form>
-    </div>
+  </form>
+  </div>
   );
-}
-
-
-export default Settings;
+  }
