@@ -82,15 +82,15 @@ function SignUp() {
   const initialFormState = {
     username: '',
     password: '',
-    passwordConfirm: '',
+    password_confirmation: '',
     weight: 65,
     height: 175,
     age: 30,    
-    gender: 5,
+    mf: 5,
     activity_level: 1.2,
-    weight_goal: 65,
-    water_goal: 2000,   
-    public: 'false',
+    goal_weight: 65,
+    water: 2000,   
+    public: false,
 
   }
   const[formState, setFormState] = useState(initialFormState)
@@ -104,7 +104,7 @@ function SignUp() {
   }
 
   function handleGraphics(target, value) {
-    const newValue = isNaN(value) ? value : parseFloat(value)
+    const newValue = JSON.parse(value)
     setFormState({
       ...formState,
       [target.name]: newValue
@@ -121,6 +121,7 @@ function SignUp() {
       dispatch({type: 'setLoggedInUser', data: data.username})
       useHistory.push('/')
     })
+    console.log()
   }
   return (
     <div>
@@ -166,8 +167,8 @@ function SignUp() {
           type="password"
           autoComplete="current-password"
           variant="outlined"
-          name="passwordConfirm"
-          value={formState.passwordConfirm}
+          name="password_confirmation"
+          value={formState.password_confirmation}
           onChange={handleOnChange}/>
 
       <br/>
@@ -207,9 +208,9 @@ function SignUp() {
       <br/>
 
       <RadioButtonsGroup 
-      initialValue={formState.gender.toString()} 
+      initialValue={formState.mf.toString()} 
       handleGraphics={handleGraphics} 
-      name={'gender'} 
+      name={'mf'} 
       buttons={genders}/>
 
       <br/>
@@ -226,9 +227,9 @@ function SignUp() {
       <br/>
 
       <InputSlider 
-      initialValue={formState.weight_goal} 
+      initialValue={formState.goal_weight} 
       handleGraphics={handleGraphics} 
-      name={'weight_goal'} 
+      name={'goal_weight'} 
       label={'Weight'} 
       max={280} 
       min={50}/>
@@ -236,9 +237,9 @@ function SignUp() {
       <br/>
 
       <InputSlider 
-      initialValue={formState.water_goal} 
+      initialValue={formState.water} 
       handleGraphics={handleGraphics} 
-      name={'water_goal'} 
+      name={'water'} 
       label={'Water'} 
       max={4000} 
       min={250}/>
@@ -246,7 +247,7 @@ function SignUp() {
       <br/>
 
       <RadioButtonsGroup 
-      initialValue={formState.public} 
+      initialValue={formState.public.toString()} 
       handleGraphics={handleGraphics} 
       name={'public'} 
       buttons={social}/>
