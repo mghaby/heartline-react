@@ -1,8 +1,8 @@
 import heartLineApi from '../config/api'
 
 // create user
-export async function signUp(user) {
-    const response = await heartLineApi.post('/api/users/', user)
+export async function signUp(data) {
+    const response = await heartLineApi.post('/api/users/', data)
     return response.data
 }
 
@@ -40,7 +40,7 @@ export async function signOut(data) {
 };
 
 // user sign in 
-export async function signIn(user) {
-    const response = await heartLineApi.post('/api/users/sign_in', user)
+export async function signIn(data) {
+    const response = await heartLineApi.post('/api/users/sign_in', data)
     return response.data
 }

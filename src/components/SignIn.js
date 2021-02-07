@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
   
   const classes = useStyles();
-  const initialFromState = {
+  const initialFormState = {
     username: "",
     password: ""
   }
-  const [formState, setFormState] = useState(initialFromState)
+  const [formState, setFormState] = useState(initialFormState)
   const {dispatch} = useGlobalState()
 
   function handleOnChange(event) {
@@ -39,6 +39,8 @@ function SignIn() {
     signIn(formState)
     .then(({username, jwt}) => {
       console.log(username, jwt)
+      sessionStorage.setItem('token', jwt)
+      sessionStroage.setItem('user', username)
       dispatch({type: 'setLoggedInUser', data: username})
       dispatch({type: 'setToken', data: jwt})
       useHistory.push('/Home')

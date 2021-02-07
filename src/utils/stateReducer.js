@@ -1,6 +1,6 @@
 function reducer(state, action) {
     switch(action.type) {
-        case 'setUser':{
+        case 'setUsers':{
 			return {
 				...state,
 				users: action.data
