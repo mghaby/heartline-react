@@ -8,7 +8,7 @@ import RadioButtonsGroup from './Radio'
 import NativeSelects from './Select'
 import {signUp} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
-import {useHistory} from 'react-router-dom'
+// import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -118,11 +118,9 @@ function SignUp() {
       sessionStorage.setItem('token', data.jwt)
       sessionStorage.setItem('id', data.id)
       dispatch({type: 'setLoggedInUser', data: data.id})
-      dispatch({type: 'setUser', data: data})
-      useHistory.push('/')
-      console.log(data)
+      console.log('signup.data: ', data)
     })
-    // console.log(formState)
+
   }
   return (
     <div>

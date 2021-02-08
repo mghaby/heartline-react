@@ -8,7 +8,6 @@ import RadioButtonsGroup from './Radio'
 import NativeSelects from './Select'
 import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
-import {getUser} from '../services/userServices'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,23 +78,17 @@ const levels = [
 
 export default function Settings() {
   const {store, dispatch} = useGlobalState()
-	const {user, loggedInUser} = store
+	const {user} = store
 
-  useEffect(() => {
-		getUser(loggedInUser)
-		.then((user) => dispatch({type: 'setUser', data: user}))
-		.catch((error) => console.log(error))
-	},[loggedInUser])
+  console.log('settings:', user)
+  // const initialFormState = user
 
-  const initialFormState = {user}
+	const [formState, setFormState] = useState(user)
 
-	const [formState, setFormState] = useState(initialFormState)
-  
-  console.log(formState)
+  // console.log(initialFormState)
+  console.log('formState', formState)
   
   const classes = useStyles();
-
-  // const[formState, setFormState] = useState(initialFormState)
 
   function handleOnChange(event) {
     setFormState({
@@ -112,26 +105,15 @@ export default function Settings() {
     })
   }
 
-  // function handleSubmit(event) {
-  //   event.preventDefault()
-  //   updateUser(loggedInUser)
-  //   .then((data) => {
-  //     sessionStorage.setItem('token', data.jwt)
-  //     sessionStorage.setItem('user', data.username)
-  //     dispatch({type: 'updateUser', data: data.username})
-  //     useHistory.push('/')
-  //   })
-  //   console.log(formState)
-  // }
-
   function handleSubmit(event) {
-		event.preventDefault()
-		if(loggedInUser) {
-			updateUser( {id: loggedInUser, ...formState})
-			.then(() => {
-				dispatch({type: 'updateUser', data: {id: loggedInUser, ...formState}})
-			})
-		}}
+    event.preventDefault()
+    updateUser( {id: formState.id, ...formState})
+    .then(() => {
+      dispatch({type: 'updateUser', data: {id: formState.id, ...formState}})
+    })
+    console.log(formState)
+  }
+
   return (
     <div>
         <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
@@ -156,7 +138,7 @@ export default function Settings() {
           value={formState.password}
           onChange={handleOnChange}/>
 
-      <br/>
+      {/* <br/>
 
       <TextField
           id="passwordConfirm"
@@ -166,7 +148,7 @@ export default function Settings() {
           variant="outlined"
           name="password_confirmation"
           value={formState.password_confirmation}
-          onChange={handleOnChange}/>
+          onChange={handleOnChange}/> */}
 
       <br/>
 
@@ -203,14 +185,14 @@ export default function Settings() {
       min={15}/>
 
       <br/>
-
+{/* 
       <RadioButtonsGroup 
       initialValue={formState.mf.toString()} 
       handleGraphics={handleGraphics} 
       name={'mf'} 
       buttons={genders}/>
 
-      <br/>
+      <br/> */}
 
       <NativeSelects
       initialValue={formState.activity_level} 
@@ -243,11 +225,11 @@ export default function Settings() {
 
       <br/>
 
-      <RadioButtonsGroup 
+      {/* <RadioButtonsGroup 
       initialValue={formState.public.toString()} 
       handleGraphics={handleGraphics} 
       name={'public'} 
-      buttons={social}/>
+      buttons={social}/> */}
 
       <br/>
 

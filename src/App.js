@@ -19,14 +19,14 @@ function App() {
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  // const {user, loggedInUser} = store
+  const {user, loggedInUser} = store
 
-  // useEffect(() => {
-		// getUser(loggedInUser)
-		// .then((user) => dispatch({type: 'setUser', data: initialState.user}))
-		// .catch((error) => console.log(error)); console.log(user)
-  //   console.log(user)
-	// },[loggedInUser])
+  useEffect(() => {
+		getUser(loggedInUser)
+		.then((user) => dispatch({type: 'setUser', data: user}))
+		.catch((error) => console.log(error));
+    console.log('app.user: ', user)
+	},[loggedInUser])
 
 
   return (
