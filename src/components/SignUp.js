@@ -113,14 +113,16 @@ function SignUp() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    signUp(formState)
+    signUp(formState) 
     .then((data) => {
       sessionStorage.setItem('token', data.jwt)
-      sessionStorage.setItem('user', data.username)
-      dispatch({type: 'setLoggedInUser', data: data.username})
+      sessionStorage.setItem('id', data.id)
+      dispatch({type: 'setLoggedInUser', data: data.id})
+      dispatch({type: 'setUser', data: data})
       useHistory.push('/')
+      console.log(data)
     })
-    console.log(formState)
+    // console.log(formState)
   }
   return (
     <div>

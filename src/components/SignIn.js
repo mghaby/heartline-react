@@ -37,11 +37,10 @@ function SignIn() {
   function handleSubmit(event) {
     event.preventDefault()
     signIn(formState)
-    .then(({username, jwt}) => {
-      console.log(username, jwt)
+    .then(({id, jwt}) => {
       sessionStorage.setItem('token', jwt)
-      sessionStorage.setItem('user', username)
-      dispatch({type: 'setLoggedInUser', data: username})
+      sessionStorage.setItem('id', id)
+      dispatch({type: 'setLoggedInUser', data: id})
       dispatch({type: 'setToken', data: jwt})
       useHistory.push('/Home')
     })

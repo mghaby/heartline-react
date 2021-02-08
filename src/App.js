@@ -14,18 +14,19 @@ function App() {
 
   const initialState = {
     user: {},
-    loggedInUser: sessionStorage.getItem('user') || null,
+    loggedInUser: sessionStorage.getItem('id') || null,
 		auth: {token:sessionStorage.getItem('token') || null}
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggerInUser} = store
+  // const {user, loggedInUser} = store
 
-  useEffect(() => {
-		getUser(loggerInUser)
-		.then((user) => dispatch({type: 'setUser', data: user}))
-		.catch((error) => console.log(error))
-	},[loggerInUser])
+  // useEffect(() => {
+		// getUser(loggedInUser)
+		// .then((user) => dispatch({type: 'setUser', data: initialState.user}))
+		// .catch((error) => console.log(error)); console.log(user)
+  //   console.log(user)
+	// },[loggedInUser])
 
 
   return (
