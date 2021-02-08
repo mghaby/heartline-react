@@ -81,18 +81,19 @@ export default function Settings() {
   const {store, dispatch} = useGlobalState()
 	const {user, loggedInUser} = store
 
+  useEffect(() => {
+		getUser(loggedInUser)
+		.then((user) => dispatch({type: 'setUser', data: user}))
+		.catch((error) => console.log(error))
+	},[loggedInUser])
+
   const initialFormState = {user}
 
 	const [formState, setFormState] = useState(initialFormState)
   
-
+  console.log(formState)
+  
   const classes = useStyles();
-
-  // 	useEffect(() => {
-	// 	getUser(loggedInUser)
-	// 	.then((user) => dispatch({type: 'setUser', data: user}))
-	// 	.catch((error) => console.log(error))
-	// },[loggedInUser])
 
   // const[formState, setFormState] = useState(initialFormState)
 
