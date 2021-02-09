@@ -87,7 +87,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					weight: aciton.data
+					weight: action.data
 				}
 			}
 		}
