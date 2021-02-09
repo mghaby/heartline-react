@@ -54,10 +54,10 @@ function WeightLog(){
             alignItems="center">
             <Paper elevation={3}
             style={paperStyles}>
-                Username: {random.username}
+                Username: {random[0].username}
                 <br/>
                 <br/>
-                Goal Weight:
+                Goal Weight: 
                 <br/>
                 <br/>
                 Current Weight:
@@ -67,7 +67,7 @@ function WeightLog(){
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                Username:
+                Username: {random[1].username}
                 <br/>
                 <br/>
                 Goal Weight:

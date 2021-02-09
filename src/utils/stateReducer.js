@@ -43,7 +43,7 @@ function reducer(state, action) {
 		case 'addRandom': {
 			return {
 				...state,
-				random: action.data
+				random:  state + action.data
 			}
 		}
 		case 'addCalories': {
@@ -51,16 +51,16 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					calories:  state + action.data
+					calories:  state.calories + action.data
 				}
-			}
+			}; 
 		}
 		case 'subtractCalories': {
 			return {
 				...state,
 				user: {
 					...state.user,
-					calories: state - action.data
+					calories: state.calories - action.data
 				}
 			}
 		}
@@ -69,7 +69,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					water_count: state + action.data
+					water_count: state.water_count + action.data
 				}
 			}
 		}
@@ -78,7 +78,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					water_count: state - action.data
+					water_count: state.water_count - action.data
 				}
 			}
 		}

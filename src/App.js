@@ -13,10 +13,10 @@ import {getUser} from './services/userServices'
 function App() {
 
   const initialState = {
-    user: null,
+    user: {},
     loggedInUser: sessionStorage.getItem('id') || null,
 		auth: {token:sessionStorage.getItem('token') || null},
-    random: []
+    random: [{username: "testing1"}, {username: "test2"}]
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)

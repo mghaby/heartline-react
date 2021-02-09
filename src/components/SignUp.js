@@ -8,7 +8,7 @@ import RadioButtonsGroup from './Radio'
 import NativeSelects from './Select'
 import {signUp} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
-// import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +77,9 @@ const levels = [
   }
 ]
 
+
 function SignUp() {
+  let history = useHistory()
   const classes = useStyles();
   const initialFormState = {
     username: '',
@@ -122,7 +124,8 @@ function SignUp() {
       console.log('signup.formState: ', formState)
       console.log('signup.data: ', data)
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error)); 
+    history.push('/')
   }
   return (
     <div>
