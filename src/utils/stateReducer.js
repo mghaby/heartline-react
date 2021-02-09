@@ -40,12 +40,12 @@ function reducer(state, action) {
 				}
 			}
 		}
-		case 'addRandom': {
-			return {
-				...state,
-				random: action.data
-			}
-		}
+		// case 'addRandom': {
+		// 	return {
+		// 		...state,
+		// 		random: action.data
+		// 	}
+		// }
 		default: return state
 	}
 }

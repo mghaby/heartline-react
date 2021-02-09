@@ -33,16 +33,16 @@ const useStyles = makeStyles((theme) => ({
 
 function WeightLog(){
     const classes = useStyles();
-    const {store, dispatch} = useGlobalState();
-    const {random} = store
+    // const {store, dispatch} = useGlobalState();
+    // const {random} = store
 
-    getRandom()
-    .then((data) => {
-      dispatch({type: 'addRandom', data: data})
-    })
-    .catch((error) => console.log(error))
+    // getRandom()
+    // .then((data) => {
+    //   dispatch({type: 'addRandom', data: data})
+    // })
+    // .catch((error) => console.log(error))
 
-    console.log(random)
+    // console.log(random)
 
     return(
         <div>
