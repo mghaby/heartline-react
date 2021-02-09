@@ -108,8 +108,8 @@ export default function Settings() {
   function handleSubmit(event) {
     event.preventDefault()
     updateUser( {id: formState.id, ...formState})
-    .then(() => {
-      dispatch({type: 'updateUser', data: {id: formState.id, ...formState}})
+    .then((data) => {
+      dispatch({type: 'setUser', data: data})
     })
     console.log(formState)
   }

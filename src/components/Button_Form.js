@@ -42,12 +42,6 @@ export default function FormDialog(props) {
     setOpen(false);
   };
 
-  const handleOnChange = (event) => {
-    console.log(event.target.value)
-  }
-
-
-
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -64,9 +58,8 @@ export default function FormDialog(props) {
     }
   }
 
-
     const handleSubmit = () => {
-      dispatch({type:'addCalories', data: value})
+      props.operator(value)
       console.log(value)
       setOpen(false);
     };

@@ -6,25 +6,25 @@ function reducer(state, action) {
 				user: action.data
 			}
 		}
-		case 'deleteUser': {
-			const updatedUsers = state.users.filter((user) => {
-				return user.id !== parseInt(action.data)
-			})
-			return {
-				...state,
-				user: updatedUsers
-			}
-		}
-		case 'updateUser': {
-			const user = state.users.find((user) => user.id === action.data.id)
-			const theRest = state.users.filter((user) => user.id !== action.data.id)
-			const updatedUser = Object.assign(user, action.data)
-			return {
-				...state,
-				user: [updatedUser, ...theRest]
-			}
+		// case 'deleteUser': {
+		// 	const updatedUsers = state.users.filter((user) => {
+		// 		return user.id !== parseInt(action.data)
+		// 	})
+		// 	return {
+		// 		...state,
+		// 		user: updatedUsers
+		// 	}
+		// }
+		// case 'updateUser': {
+		// 	const user = state.users.find((user) => user.id === action.data.id)
+		// 	const theRest = state.users.filter((user) => user.id !== action.data.id)
+		// 	const updatedUser = Object.assign(user, action.data)
+		// 	return {
+		// 		...state,
+		// 		user: [updatedUser, ...theRest]
+		// 	}
 
-		}
+		// }
 		case 'setLoggedInUser': {
 			return {
 				...state,
@@ -78,10 +78,20 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					water_count: state -action.data
+					water_count: state - action.data
 				}
 			}
 		}
+		case 'updateWeight': {
+			return {
+				...state,
+				user: {
+					...state.user,
+					weight: aciton.data
+				}
+			}
+		}
+		default: return state;
 	}
 }
 

@@ -1,42 +1,30 @@
-import React, {useState} from 'react';
-import BasicButtonGroup from './ButtonGroup'
-import Calories from './Calories'
-import Water from './Water'
+import React, {useEffect, useState} from 'react';
 import BMI from './BMI'
-import Weight from './Weight'
+import Progress from './Progess'
+import FormDialog from './Button_Form'
+import AddSharpIcon from '@material-ui/icons/AddSharp';
+import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
 
 function Home() {
 	const {store, dispatch} = useGlobalState()
-	const {calories, water, user} = store
+	const {user} = store
+	console.log('Home.user: ', user)
+	const {weight, weight_goal, height, age, activityLevel, mf, calories, water, water_count} = user
+	console.log('Home.user.weight: ', weight, 
+		'Home.user.weight_goal: ', weight,
+		'Home.user.height: ', height,
+		'Home.user.age: ', age,
+		'Home.user.activityLevel: ', activityLevel,
+		'Home.user.mf: ', mf)
 
-  	console.log('Home.user: ', user)
-	console.log('Home.calorie: ', calories)
-	console.log('Home.water: ', water)
+	const [bmi, setBMI] = useState(21)
 
-	// function handleOnChange(event) {
-	// 	setUserState({
-	// 	...userState,
-	// 	[event.target.name]: event.target.value
-	// 	})
-	// }
-
-	// function addProgress(event) {
-	// 	setUserState({
-	// 		...userState,
-	// 		[event.target.name] : userState[event.target.name] + event 
-	// 	})
-	// 	// setCalories((prev) => prev + e)
-	// }
-
-	// function subtractProgress(event) {
-    //     setUserState({
-	// 		...userState,
-	// 		[event.target.name] : userState[event.target.name] - event 
-	// 	})
-	// }
-
+	const baseValue = (((10*(weight) + 6.25*(height) - 5*(age) +5) * activityLevel)*mf)
+  
+	const totalCalories = (weight_goal>weight) ? baseValue*1.11 : baseValue*0.89
+	
 	const health = [
 		{SevereThinness: '<16'},
 		{ModerateThinness: '16 - 17'},
@@ -48,28 +36,42 @@ function Home() {
 		{ObeseClassIII: '>40'}
 	]
 
-  	function totalCalories(weight, height, age, activityLevel, male) {
-		// if (weight_goal>weight){
-		// (((10(weight) + 6.25(height) - 5(age) +5) * activityLevel) (male) ? + 5 : -161)*1.11
-		// } else {
-		// (((10(weight) + 6.25(height) - 5(age) +5) * activityLevel) (male) ? + 5 : -161)*0.89
-		// }
-
+	function addCalories(calories){
+		dispatch({type: 'addCalories', data: calories})
 	}
-		// (0.25 kg/week)
-		// Gain: calories x 1.11
-		// Loss: calories x 0.89
-
-	function bMI(weight, height) {
-		return weight/(height)^2
+	function subtractCalories(calories){
+		dispatch({type: 'subtractCalories', data: calories})
 	}
+	function addWater(water){
+		dispatch({type: 'addWater', data: water})
+	}
+	function subtractWater(water){
+		dispatch({type: 'subtractWater', data: water})
+	}
+	function updateWeight(weight){
+		dispatch({type: 'updateWeight', data: weight})
+	}
+
+	// useEffect(() => {
+	// 	updateUser( {id: formState.id, ...formState})
+	// 	.then((data) => {
+	// 	  dispatch({type: 'setUser', data: data})
+	// 	})
+	// },[user])
 
     return (
       <div>
-		<Calories />
-		<Water />
+		<div style={{width:200}}><Progress value={calories} total={totalCalories}/></div>
+		<FormDialog value={AddSharpIcon} operator={addCalories} /> 
+        <FormDialog value={RemoveSharpIcon} operator={subtractCalories} />
+		<p>`${calories} / ${totalCalories}`</p>
+		<div style={{width:200}}><Progress value={water_count} total={water}/></div>
+		<FormDialog value={AddSharpIcon} operator={addWater}/> 
+        <FormDialog value={RemoveSharpIcon} operator={subtractWater} />
+		<p>`${water_count} / ${water}`</p>
 		<BMI />
-		<Weight />
+		<user.weight />
+		<FormDialog value={AddSharpIcon} operator={updateWeight}/> 
       </div>
     	);
   }
