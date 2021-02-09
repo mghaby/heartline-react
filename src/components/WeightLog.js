@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import getRandom from '../services/userServices';
+import {useGlobalState} from '../utils/stateContext'
+import {getRandom} from '../services/userServices'
 
 // make all text in here black/grey
 
@@ -32,17 +33,25 @@ const useStyles = makeStyles((theme) => ({
 
 function WeightLog(){
     const classes = useStyles();
-    // const {store, dispatch} = useGlobalState();
-    // const {random} = store
+    const {store, dispatch} = useGlobalState();
+    const {random} = store
 
-    // getRandom()
-    // .then((data) => {
-    //   dispatch({type: 'addRandom', data: data})
-    // })
-    // .catch((error) => console.log(error))
-
-    // console.log(random)
-
+    async function onClick(){
+    getRandom()
+    .then((data) => {
+      dispatch({type: 'addRandom', data: data})
+    }).then(() => {
+        console.log('weightlog.random:', random.username)
+    }).catch((error) => console.log(error))}
+    // const = username
+    // useEffect(() => {
+    //     if (random) {
+    //         random.username
+    //     } else {
+    //         "Where is my username?"
+    //     }
+    // },[random])
+    
     return(
         <div>
         <Grid
@@ -116,7 +125,7 @@ function WeightLog(){
                 Age:
             </Paper>
         </Grid>
-        <button onClick={getRandom}>testing</button>
+        <button onClick={onClick}>testing</button>
         </div>
     )
 };
