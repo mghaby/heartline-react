@@ -91,7 +91,8 @@ function SignUp() {
     goal_weight: 65,
     water: 2000,   
     public: false,
-
+    calories: 0,
+    water_count: 0
   }
   const[formState, setFormState] = useState(initialFormState)
   const {dispatch} = useGlobalState()

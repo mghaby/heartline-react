@@ -3,17 +3,20 @@ import Progress from './Progess'
 import FormDialog from './Button_Form'
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
+import {useGlobalState} from '../utils/stateContext';
 
 
-function Calories({ addProgress, subtractProgess }) {
+function Calories() {
     const [calories, setCalories] = useState(0)
+    const {store, dispatch} = useGlobalState()
+    
 
     const handleOnClickAdd = (event) => {
-        addProgress(event)
+        dispatch({type: 'addCalories', data: event.target.value})
     }
 
     const handleOnClickSubtract = (event) => {
-        subtractProgess(event)
+      dispatch({type: 'subtractCalories', data: event.target.value})
     }
 
     return (

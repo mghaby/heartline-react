@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import {useGlobalState} from '../utils/stateContext'
 
 const useStyles = makeStyles({
   root: {
     width: 500
   },
 });
-// (label-16)/(40-16)*100
 const marks = [
       {
         value: 16,
@@ -40,15 +40,18 @@ const marks = [
     return `${value}`;
   }
 
-export default function BMI(props) {
+export default function BMI() {
   const classes = useStyles();
-  const [value, setValue] = useState('');
+
+  const {store} = useGlobalState()
+	const {user} = store
+  const {weight, height} = user
+
+  const [bmi, setBMI] = useState(21)
 
   useEffect(() => {
-    setValue(props.value)
-  },[])
-  
-
+    setBMI((weight/(height^2)*10000))
+  },[weight, height])
   
 
   return (
@@ -57,7 +60,7 @@ export default function BMI(props) {
 
       <Slider
         disabled
-        value={value}
+        value={bmi}
         getAriaValueText={valuetext}
         aria-labelledby="disabled-slider"
         step={1}

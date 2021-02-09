@@ -54,70 +54,71 @@ function WeightLog(){
             alignItems="center">
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random.username}
+                Username: {random.username}
                 <br/>
                 <br/>
-                Goal: {random.goal_weight} Kg
+                Goal Weight:
                 <br/>
                 <br/>
-                Current: {random.weight} Kg
+                Current Weight:
                 <br/>
                 <br/>
-                Age: {random.age}
+                Age:
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random.username}
+                Username:
                 <br/>
                 <br/>
-                Goal: {random.goal_weight} Kg
+                Goal Weight:
                 <br/>
                 <br/>
-                Current: {random.weight} Kg
+                Current Weight:
                 <br/>
                 <br/>
-                Age: {random.age}
+                Age:
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random.username}
+                Username:
                 <br/>
                 <br/>
-                Goal: {random.goal_weight} Kg
+                Goal Weight:
                 <br/>
                 <br/>
-                Current: {random.weight} Kg
+                Current Weight:
                 <br/>
                 <br/>
-                Age: {random.age}
+                Age:
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random.username}
+                Username:
                 <br/>
                 <br/>
-                Goal: {random.goal_weight} Kg
+                Goal Weight:
                 <br/>
                 <br/>
-                Current: {random.weight} Kg
+                Current Weight:
                 <br/>
                 <br/>
-                Age: {random.age}
+                Age:
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random.username}
+                Username:
                 <br/>
                 <br/>
-                Goal: {random.goal_weight} Kg
+                Goal Weight:
                 <br/>
                 <br/>
-                Current: {random.weight} Kg
+                Current Weight:
                 <br/>
                 <br/>
-                Age: {random.age}
+                Age:
             </Paper>
         </Grid>
+        <button>testing</button>
         </div>
     )
 };
