@@ -15,7 +15,8 @@ function App() {
   const initialState = {
     user: {},
     loggedInUser: sessionStorage.getItem('id') || null,
-		auth: {token:sessionStorage.getItem('token') || null}
+		auth: {token:sessionStorage.getItem('token') || null},
+    random: []
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)

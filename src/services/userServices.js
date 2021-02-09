@@ -9,49 +9,36 @@ export async function signUp(data) {
 
 // random call for users with public = true
 export default async function getRandom(){
-//     const response = await axios.all([
-//         heartLineApi.get('/api/users/random'),
-//         heartLineApi.get('/api/users/random'),
-//         heartLineApi.get('/api/users/random'),
-//         heartLineApi.get('/api/users/random'),
-//         heartLineApi.get('/api/users/random')
-//     ]).then(
-//         axios.spread((...response) => {
-//           const responseOne = response[0];
-//           const responseTwo = response[1];
-//           const responseThree = response[2];
-//           const responseFour = response[3];
-//           const responseFive = response[4];
 
-//           console.log(responseOne, responseTwo, responseThree, responseFour, responseFive);
-//         })).catch(errors => {
-//             console.error(errors);
-//           });
-
-let one = "http://localhost:3000/api/users/random"
-let two = "http://localhost:3000/api/users/random"
-let three = "http://localhost:3000/api/users/random"
-let four = "http://localhost:3000/api/users/random"
-let five = "http://localhost:3000/api/users/random"
+//  -------------- returns 5 objects in one go
+// let one = "http://localhost:3000/api/users/random"
+// let two = "http://localhost:3000/api/users/random"
+// let three = "http://localhost:3000/api/users/random"
+// let four = "http://localhost:3000/api/users/random"
+// let five = "http://localhost:3000/api/users/random"
 
 
-const requestOne = axios.get(one);
-const requestTwo = axios.get(two);
-const requestThree = axios.get(three);
-const requestFour = axios.get(four);
-const requestFive = axios.get(five);
+// const requestOne = axios.get(one);
+// const requestTwo = axios.get(two);
+// const requestThree = axios.get(three);
+// const requestFour = axios.get(four);
+// const requestFive = axios.get(five);
 
-axios.all([requestOne, requestTwo, requestThree, requestFour, requestFive]).then(axios.spread((...responses) => {
-  const responseOne = responses[0]
-  const responseTwo = responses[1]
-  const responseThree = responses[2]
-  const responseFour = responses[3]
-  const responseFive = responses[4]
+// axios.all([requestOne, requestTwo, requestThree, requestFour, requestFive]).then(axios.spread((...responses) => {
+//   const responseOne = responses[0]
+//   const responseTwo = responses[1]
+//   const responseThree = responses[2]
+//   const responseFour = responses[3]
+//   const responseFive = responses[4]
 
-  console.log(responseOne.data, responseTwo.data, responseThree.data, responseFour.data, responseFive.data)
-})).catch(errors => {
-  console.log(errors)
-})
+//   console.log(responseOne.data) // , responseTwo.data, responseThree.data, responseFour.data, responseFive.data)
+// })).catch(errors => {
+//   console.log(errors)
+// })
+
+    const response = await heartLineApi.get('/api/users/random')
+    // console.log(response.data)
+    return response.data
 
 };
 
