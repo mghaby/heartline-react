@@ -16,8 +16,8 @@ function reducer(state, action) {
 			}
 		}
 		case 'updateUser': {
-			const user = state.users.find((user) => user.id == action.data.id)
-			const theRest = state.users.filter((user) => user.id != action.data.id)
+			const user = state.users.find((user) => user.id === action.data.id)
+			const theRest = state.users.filter((user) => user.id !== action.data.id)
 			const updatedUser = Object.assign(user, action.data)
 			return {
 				...state,
@@ -38,12 +38,6 @@ function reducer(state, action) {
 					...state.auth,
 					token: action.data
 				}
-			}
-		}
-		case 'addRandom': {
-			return {
-				...state,
-				random: action.data
 			}
 		}
 		default: return state

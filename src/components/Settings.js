@@ -138,9 +138,9 @@ export default function Settings() {
           value={formState.password}
           onChange={handleOnChange}/>
 
-      {/* <br/>
+      <br/>
 
-      <TextField
+      {/* <TextField
           id="passwordConfirm"
           label="Password Confirmation"
           type="password"
@@ -148,9 +148,9 @@ export default function Settings() {
           variant="outlined"
           name="password_confirmation"
           value={formState.password_confirmation}
-          onChange={handleOnChange}/> */}
+          onChange={handleOnChange}/>
 
-      <br/>
+      <br/> */}
 
       <h1>About Me</h1>
 
@@ -185,14 +185,14 @@ export default function Settings() {
       min={15}/>
 
       <br/>
-{/* 
+
       <RadioButtonsGroup 
       initialValue={formState.mf.toString()} 
       handleGraphics={handleGraphics} 
       name={'mf'} 
       buttons={genders}/>
 
-      <br/> */}
+      <br/>
 
       <NativeSelects
       initialValue={formState.activity_level} 
@@ -225,11 +225,11 @@ export default function Settings() {
 
       <br/>
 
-      {/* <RadioButtonsGroup 
+      <RadioButtonsGroup 
       initialValue={formState.public.toString()} 
       handleGraphics={handleGraphics} 
       name={'public'} 
-      buttons={social}/> */}
+      buttons={social}/>
 
       <br/>
 

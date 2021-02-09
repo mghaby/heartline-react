@@ -43,6 +43,9 @@ function SignIn() {
       dispatch({type: 'setLoggedInUser', data: id})
       dispatch({type: 'setToken', data: jwt})
       useHistory.push('/Home')
+      console.log('signIn.formState: ', formState)
+      console.log('signIn.id: ', id)
+      console.log('signIn.jwt: ', jwt)
     })
     .catch((error) => console.log(error))
   }
