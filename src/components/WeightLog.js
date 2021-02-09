@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
 // getRandom().then((res) => console.log(res))
 
 function WeightLog(){
+    function testing(){
+        getRandom().then((res) => console.log(res))
+    }
     const classes = useStyles();
     return(
         <div>
@@ -105,7 +108,7 @@ function WeightLog(){
                 Age:
             </Paper>
         </Grid>
-        <button onClick={getRandom}>testing</button>
+        <button onClick={testing}>testing</button>
         </div>
     )
 };
