@@ -118,6 +118,7 @@ function SignUp() {
     event.preventDefault()
     signUp(formState) 
     .then((data) => {
+      sessionStorage.setItem('user', formState)
       sessionStorage.setItem('token', data.jwt)
       sessionStorage.setItem('id', data.id)
       dispatch({type: 'setLoggedInUser', data: data.id})

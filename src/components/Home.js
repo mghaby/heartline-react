@@ -10,7 +10,7 @@ import {useGlobalState} from '../utils/stateContext'
 function Home() {
 	const {store, dispatch} = useGlobalState()
 	const {user, loggedInUser} = store
-	console.log('Home.user: ', user)
+	console.log('Home.user: ', user.calories)
 	// const {weight, goal_weight, height, age, activity_level, mf, calories, water, water_count} = user
 	// console.log('Home.user.weight: ', user.weight, 
 	// 	'Home.user.goal_weight: ', user.goal_weight,
@@ -80,7 +80,7 @@ function Home() {
 		<p>{`${user.water_count} / ${user.water}`}</p>
 		<BMI />
 		{user.weight}
-		<FormDialog value={AddSharpIcon} operator={updateWeight}/> 
+		<FormDialog value={AddSharpIcon} operator={updateWeight}/>
       </div>
     	);
   }
