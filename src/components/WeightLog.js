@@ -36,21 +36,14 @@ function WeightLog(){
     const {store, dispatch} = useGlobalState();
     const {random} = store
 
-    async function onClick(){
-    getRandom()
+    useEffect(() => {
+        getRandom()
     .then((data) => {
       dispatch({type: 'addRandom', data: data})
     }).then(() => {
         console.log('weightlog.random:', random.username)
-    }).catch((error) => console.log(error))}
-    // const = username
-    // useEffect(() => {
-    //     if (random) {
-    //         random.username
-    //     } else {
-    //         "Where is my username?"
-    //     }
-    // },[random])
+    }).catch((error) => console.log(error))
+    },[])
     
     return(
         <div>
@@ -61,7 +54,7 @@ function WeightLog(){
             alignItems="center">
             <Paper elevation={3}
             style={paperStyles}>
-                Username:
+                Username: {random.username}
                 <br/>
                 <br/>
                 Goal Weight:
@@ -125,7 +118,7 @@ function WeightLog(){
                 Age:
             </Paper>
         </Grid>
-        <button onClick={onClick}>testing</button>
+        <button>testing</button>
         </div>
     )
 };
