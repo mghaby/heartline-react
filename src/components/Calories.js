@@ -3,9 +3,10 @@ import Progress from './Progess'
 import FormDialog from './Button_Form'
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
+import useGlobalState from '../utils/stateContext';
 
 
-function Calories({ addProgress, subtractProgess }) {
+function Calories() {
     const [calories, setCalories] = useState(0)
 
     const handleOnClickAdd = (event) => {

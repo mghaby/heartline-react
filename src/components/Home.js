@@ -5,33 +5,22 @@ import Water from './Water'
 import BMI from './BMI'
 import Weight from './Weight'
 import {updateUser} from '../services/userServices'
-// import {useGlobalState} from '../utils/stateContext'
+import {useGlobalState} from '../utils/stateContext'
 
 function Home() {
-	// const {store, dispatch} = useGlobalState()
-	// const {user} = store
+	const {store, dispatch} = useGlobalState()
+	const {calories, water, user} = store
 
-  	// console.log('Home.user: ', user)
+  	console.log('Home.user: ', user)
+	console.log('Home.calorie: ', calories)
+	console.log('Home.water: ', water)
 
-	// const [userState, setUserState] = useState(user)
-
-  	// console.log('Home.userState: ', userState)
-
-	  const initialUserState = {	
-		calories: 0,
-		water: 0,  
-		weight: 0
-	  }
-	  const[userState, setUserState] = useState(initialUserState)
-
-	console.log(userState)
-
-	function handleOnChange(event) {
-		setUserState({
-		...userState,
-		[event.target.name]: event.target.value
-		})
-	}
+	// function handleOnChange(event) {
+	// 	setUserState({
+	// 	...userState,
+	// 	[event.target.name]: event.target.value
+	// 	})
+	// }
 
 	// function addProgress(event) {
 	// 	setUserState({
@@ -77,7 +66,6 @@ function Home() {
 
     return (
       <div>
-		<BasicButtonGroup />
 		<Calories />
 		<Water />
 		<BMI />

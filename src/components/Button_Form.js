@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
+import {useGlobalState} from '../utils/stateContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function FormDialog(props) {
+  const {store, dispatch} = useGlobalState()
+	// const {calories, water, user} = store
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -63,6 +66,7 @@ export default function FormDialog(props) {
 
 
     const handleSubmit = () => {
+      dispatch({type:'addCalories', data: value})
       console.log(value)
       setOpen(false);
     };

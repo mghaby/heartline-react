@@ -12,7 +12,7 @@ function reducer(state, action) {
 			})
 			return {
 				...state,
-				users: updatedUsers
+				user: updatedUsers
 			}
 		}
 		case 'updateUser': {
@@ -21,7 +21,7 @@ function reducer(state, action) {
 			const updatedUser = Object.assign(user, action.data)
 			return {
 				...state,
-				users: [updatedUser, ...theRest]
+				user: [updatedUser, ...theRest]
 			}
 
 		}
@@ -46,7 +46,42 @@ function reducer(state, action) {
 				random: action.data
 			}
 		}
-		default: return state
+		case 'addCalories': {
+			return {
+				...state,
+				user: {
+					...state.user,
+					calories:  state + action.data
+				}
+			}
+		}
+		case 'subtractCalories': {
+			return {
+				...state,
+				user: {
+					...state.user,
+					calories: state - action.data
+				}
+			}
+		}
+		case 'addWater': {
+			return {
+				...state,
+				user: {
+					...state.user,
+					water_count: state + action.data
+				}
+			}
+		}
+		case 'subtractWater': {
+			return {
+				...state,
+				user: {
+					...state.user,
+					water_count: state -action.data
+				}
+			}
+		}
 	}
 }
 

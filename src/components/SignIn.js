@@ -42,7 +42,7 @@ function SignIn() {
       sessionStorage.setItem('id', id)
       dispatch({type: 'setLoggedInUser', data: id})
       dispatch({type: 'setToken', data: jwt})
-      useHistory.push('/Home')
+      useHistory.push('/H')
       console.log('signIn.formState: ', formState)
       console.log('signIn.id: ', id)
       console.log('signIn.jwt: ', jwt)
