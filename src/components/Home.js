@@ -23,7 +23,7 @@ function Home() {
 
 	const baseValue = (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +5) * user.activity_level)*user.mf)
   
-	const totalCalories = (user.goal_weight>user.weight) ? baseValue*1.11 : baseValue*0.89
+	const totalCalories = (user.goal_weight>user.weight) ? (baseValue*1.11) : (baseValue*0.89)
 
 	const health = [
 		{SevereThinness: '<16'},

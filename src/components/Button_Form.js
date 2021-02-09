@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   input: {
-    width: 42,
+    width: 50,
   },
 }));
 
@@ -77,6 +77,8 @@ export default function FormDialog(props) {
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
+            min={1}
+            max={5000}
           />
         </Grid>
         <Grid item>
@@ -89,7 +91,7 @@ export default function FormDialog(props) {
             inputProps={{
               step: 1,
               min: 0,
-              max: 100,
+              max: 5000,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}

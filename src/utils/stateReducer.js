@@ -51,7 +51,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					calories:  state.calories + action.data
+					calories:  state.user.calories + action.data
 				}
 			}; 
 		}
@@ -60,7 +60,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					calories: state.calories - action.data
+					calories: state.user.calories - action.data
 				}
 			}
 		}
@@ -69,7 +69,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					water_count: state.water_count + action.data
+					water_count: state.user.water_count + action.data
 				}
 			}
 		}
@@ -78,7 +78,7 @@ function reducer(state, action) {
 				...state,
 				user: {
 					...state.user,
-					water_count: state.water_count - action.data
+					water_count: state.user.water_count - action.data
 				}
 			}
 		}
