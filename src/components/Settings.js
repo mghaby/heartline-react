@@ -184,8 +184,8 @@ export default function Settings() {
       max={80} 
       min={15}/>
 
-      <br/>
-{/* 
+      {/* <br/>
+
       <RadioButtonsGroup 
       initialValue={formState.mf.toString()} 
       handleGraphics={handleGraphics} 

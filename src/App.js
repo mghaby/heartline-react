@@ -13,7 +13,7 @@ import {getUser} from './services/userServices'
 function App() {
 
   const initialState = {
-    user: {},
+    user: null,
     loggedInUser: sessionStorage.getItem('id') || null,
 		auth: {token:sessionStorage.getItem('token') || null}
   }
@@ -26,6 +26,7 @@ function App() {
 		.then((user) => dispatch({type: 'setUser', data: user}))
 		.catch((error) => console.log(error));
     console.log('app.user: ', user)
+    console.log('app.loggedInUser: ', loggedInUser)
 	},[loggedInUser])
 
 

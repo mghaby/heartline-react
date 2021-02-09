@@ -14,6 +14,7 @@ function Nav() {
 		event.preventDefault()
 		signOut(loggedInUser)
 		.then(() => {
+      dispatch({type: 'setUser', data: null})
       dispatch({type: 'setLoggedInUser', data: null})
       dispatch({type: 'setToken', data: null})
     })
