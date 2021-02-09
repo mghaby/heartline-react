@@ -118,9 +118,10 @@ function SignUp() {
       sessionStorage.setItem('token', data.jwt)
       sessionStorage.setItem('id', data.id)
       dispatch({type: 'setLoggedInUser', data: data.id})
+      console.log('signup.formState: ', formState)
       console.log('signup.data: ', data)
     })
-
+    .catch((error) => console.log(error))
   }
   return (
     <div>

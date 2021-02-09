@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import getRandom from '../services/userServices';
-import {useGlobalState} from '../utils/stateContext'
 
 // make all text in here black/grey
 
@@ -53,7 +52,7 @@ function WeightLog(){
             alignItems="center">
             <Paper elevation={3}
             style={paperStyles}>
-                Username: 
+                Username:
                 <br/>
                 <br/>
                 Goal Weight:
@@ -117,7 +116,7 @@ function WeightLog(){
                 Age:
             </Paper>
         </Grid>
-        {/* <button onClick={}>testing</button> */}
+        <button onClick={getRandom}>testing</button>
         </div>
     )
 };

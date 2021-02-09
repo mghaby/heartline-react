@@ -18,10 +18,10 @@ function Calories({ addProgress, subtractProgess }) {
 
     return (
       <div>
-          <h1>Calories</h1>
-          <div style={{width:200}}><Progress value={calories}/></div>
-          <FormDialog value={AddSharpIcon} onClick={handleOnClickAdd}/> 
-          <FormDialog value={RemoveSharpIcon} onClick={handleOnClickSubtract}/>
+        <h1>Calories</h1>
+        <div style={{width:200}}><Progress value={calories}/></div>
+        <FormDialog value={AddSharpIcon} /> 
+        <FormDialog value={RemoveSharpIcon} />
       </div>
       
   
