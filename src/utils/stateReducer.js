@@ -43,7 +43,7 @@ function reducer(state, action) {
 		case 'addRandom': {
 			return {
 				...state,
-				random:  state + action.data
+				random: action.data
 			}
 		}
 		case 'addCalories': {

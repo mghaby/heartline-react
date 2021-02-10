@@ -37,14 +37,18 @@ function WeightLog(){
     const {random} = store
 
     useEffect(() => {
-        getRandom()
+    getRandom()
     .then((data) => {
-      dispatch({type: 'addRandom', data: data})
-    }).then(() => {
-        console.log('weightlog.random:', random.username)
-    }).catch((error) => console.log(error))
+    sessionStorage.setItem('random', data)
+    // dispatch({type: 'addRandom', data: data[0]})
+    // console.log('weightlog.data: ' , data)
+})
+    // console.log('weightlog.data:', data[0])})
+    .catch((error) => console.log(error))
     },[])
     
+    // .then(() => {console.log('weightlog.random:', random.username)
+    console.log(random);
     return(
         <div>
         <Grid
@@ -52,73 +56,74 @@ function WeightLog(){
             direction="row"
             justify="space-evenly"
             alignItems="center">
+            {/* <Paper elevation={3}
+            style={paperStyles}>
+                User: {random[0].username}
+                <br/>
+                <br/>
+                Goal: {random[0].goal_weight} Kg
+                <br/>
+                <br/>
+                Current: {random[0].weight} Kg
+                <br/>
+                <br/>
+                Age: {random[0].age}
+            </Paper>
+
+
             <Paper elevation={3}
             style={paperStyles}>
-                Username: {random[0].username}
+                User: {random[1].username}
                 <br/>
                 <br/>
-                Goal Weight: 
+                Goal: {random[1].goal_weight} Kg
                 <br/>
                 <br/>
-                Current Weight:
+                Current: {random[1].weight} Kg
                 <br/>
                 <br/>
-                Age:
+                Age: {random[1].age}
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                Username: {random[1].username}
+                User: {random[2].username}
                 <br/>
                 <br/>
-                Goal Weight:
+                Goal: {random[2].goal_weight} Kg
                 <br/>
                 <br/>
-                Current Weight:
+                Current: {random[2].weight} Kg
                 <br/>
                 <br/>
-                Age:
+                Age: {random[2].age}
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                Username:
+                User: {random[3].username}
                 <br/>
                 <br/>
-                Goal Weight:
+                Goal: {random[3].goal_weight} Kg
                 <br/>
                 <br/>
-                Current Weight:
+                Current: {random[3].weight} Kg
                 <br/>
                 <br/>
-                Age:
+                Age: {random[3].age}
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                Username:
+                User: {random[4].username}
                 <br/>
                 <br/>
-                Goal Weight:
+                Goal: {random[4].goal_weight} Kg
                 <br/>
                 <br/>
-                Current Weight:
+                Current: {random[4].weight} Kg
                 <br/>
                 <br/>
-                Age:
-            </Paper>
-            <Paper elevation={3}
-            style={paperStyles}>
-                Username:
-                <br/>
-                <br/>
-                Goal Weight:
-                <br/>
-                <br/>
-                Current Weight:
-                <br/>
-                <br/>
-                Age:
-            </Paper>
+                Age: {random[4].age}
+            </Paper> */}
         </Grid>
-        <button>testing</button>
         </div>
     )
 };
