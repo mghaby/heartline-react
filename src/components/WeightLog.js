@@ -39,7 +39,9 @@ function WeightLog(){
     useEffect(() => {
     getRandom()
     .then((data) => {
-    sessionStorage.setItem('random', data)
+    sessionStorage.setItem('random', data[0])
+    dispatch({type: 'addRandom', data: data[0]})
+    console.log(data)
     // dispatch({type: 'addRandom', data: data[0]})
     // console.log('weightlog.data: ' , data)
 })
@@ -56,7 +58,7 @@ function WeightLog(){
             direction="row"
             justify="space-evenly"
             alignItems="center">
-            {/* <Paper elevation={3}
+            <Paper elevation={3}
             style={paperStyles}>
                 User: {random[0].username}
                 <br/>
@@ -122,7 +124,7 @@ function WeightLog(){
                 <br/>
                 <br/>
                 Age: {random[4].age}
-            </Paper> */}
+            </Paper>
         </Grid>
         </div>
     )
