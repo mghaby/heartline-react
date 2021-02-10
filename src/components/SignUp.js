@@ -116,18 +116,21 @@ function SignUp() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    signUp(formState) 
+    signUp(formState)
     .then((data) => {
-      sessionStorage.setItem('user', formState)
-      sessionStorage.setItem('token', data.jwt)
       sessionStorage.setItem('id', data.id)
+      sessionStorage.setItem('token', data.jwt)
       dispatch({type: 'setLoggedInUser', data: data.id})
+      dispatch({type: 'setToken', data: data.jwt})
       console.log('signup.formState: ', formState)
       console.log('signup.data: ', data)
     })
     .catch((error) => console.log(error)); 
-    history.push('/')
+    history.push('/Index')
+
   }
+
+        // sessionStorage.setItem('user', formState)
   return (
     <div>
         <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>

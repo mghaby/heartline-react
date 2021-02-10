@@ -10,7 +10,9 @@ import {useGlobalState} from '../utils/stateContext'
 function Home() {
 	const {store, dispatch} = useGlobalState()
 	const {user, loggedInUser} = store
-	console.log('Home.user: ', user.calories)
+	// const {}
+	const {totalCalories, setTotalCalories} = useState('')
+	// console.log('Home.user: ', user.calories)
 	// const {weight, goal_weight, height, age, activity_level, mf, calories, water, water_count} = user
 	// console.log('Home.user.weight: ', user.weight, 
 	// 	'Home.user.goal_weight: ', user.goal_weight,
@@ -21,10 +23,18 @@ function Home() {
 
 	const [bmi, setBMI] = useState(21)
 
-	const baseValue = (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +5) * user.activity_level)*user.mf)
-  
-	const totalCalories = (user.goal_weight>user.weight) ? (baseValue*1.11) : (baseValue*0.89)
+	// const baseValue = (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +5) * user.activity_level)*user.mf)
+	// const totalCalories = (user.goal_weight>user.weight) ? (baseValue*1.11) : (baseValue*0.89)
 
+	useEffect(()=>{
+
+	}, [user.weight])
+
+// 	function totalCalories(){
+// 		setTotalCalories((user.goal_weight>user.weight) ? (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +user.mf) * user.activity_level))*1.11 : 
+// 		(((10*(user.weight) + 6.25*(user.height) - 5*(user.age) + user.mf) * user.activity_level))*0.89)
+// }
+	
 	const health = [
 		{SevereThinness: '<16'},
 		{ModerateThinness: '16 - 17'},
