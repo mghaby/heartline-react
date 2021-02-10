@@ -16,11 +16,12 @@ function App() {
     user: sessionStorage.getItem('user') || null,
     loggedInUser: sessionStorage.getItem('id') || null,
 		auth: {token:sessionStorage.getItem('token') || null},
-    random: [{username: "testing1"}, {username: "test2"}]
+    random: sessionStorage.getItem('random') || null
   }
 
+  // {username: "testing1", goal_weight: 100, weight: 120, age: 20}, {username: "test2", goal_weight: 101, weight: 121, age: 21}
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {user, loggedInUser} = store
+  const {user, loggedInUser, random} = store
 
   useEffect(() => {
 		getUser(loggedInUser)
@@ -29,8 +30,11 @@ function App() {
 		.catch((error) => console.log(error));
     console.log('app.user: ', user)
     console.log('app.loggedInUser: ', loggedInUser)
+    console.log('app.random: ', random)
+
   },[loggedInUser])
 
+  console.log('app.random: ', random)
 
   return (
     <StateContext.Provider value={{store, dispatch}}>
