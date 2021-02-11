@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {useGlobalState} from '../utils/stateContext'
-import userEvent from '@testing-library/user-event';
 
 const useStyles = makeStyles({
   root: {
@@ -37,29 +36,35 @@ const marks = [
     }
   ];
 
-  function valuetext(value) {
-    return `${value}`;
-  }
-
 export default function BMI() {
   const classes = useStyles();
 
   const {store} = useGlobalState()
 	const {user} = store
-  const {weight, height} = user
 
-  const [bmi, setBMI] = useState(21)
+  const initialUserStat = {
+    weight: 65,
+    height: 175
+  }
+  const initialUserState = 21
+  const [bMIStat, setBMIStat] = useState(initialUserStat)
+	const [calculateBMI, setCalculateBMI] = useState('')
+	const [bMI, setBMI] = useState(initialUserState)
+useEffect(()=>{
+  setBMIStat(user)
+		  }, [user])
 
-  // useEffect((user.weight, user.height) => {
-  //   setBMI(calculateBMI(weight,height))
-  // },[user])
-  
-  // function calculateBMI(weight,height){
-  //   (weight/(height^2)*10000)
-  // // }
-  // useEffect(()=>{
-  //   console.log('BMI:', weight)
-  // }, user)
+  useEffect(()=>{
+		setCalculateBMI(Math.floor((bMIStat.weight/(bMIStat.height**2))*10000))
+		  }, [bMIStat.weight, bMIStat.height])
+
+	useEffect(()=>{
+			setBMI((calculateBMI))
+		  }, [calculateBMI])
+
+  useEffect(()=> {
+    console.log('BMI: ', bMI)
+  })
 
 
   return (
@@ -68,8 +73,7 @@ export default function BMI() {
 
       <Slider
         disabled
-        value={bmi}
-        getAriaValueText={valuetext}
+        value={bMI}
         aria-labelledby="disabled-slider"
         step={1}
         valueLabelDisplay="on"

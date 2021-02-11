@@ -8,61 +8,51 @@ import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
 
 function Home() {
+	const initialUserState = {
+		username: '',
+		password: '',
+		password_confirmation: '',
+		weight: 65,
+		height: 175,
+		age: 30,    
+		mf: 5,
+		activity_level: 1.2,
+		goal_weight: 65,
+		water: 2000,   
+		public: false,
+		calories: 0,
+		water_count: 0
+	  }
+
 	const {store, dispatch} = useGlobalState()
-	const {user, loggedInUser} = store
-	const [homeUser, setHomeUser] = useState(user)
-	const {weight, height, age, mf, activity_level, goal_weight, water, calories, water_count} = homeUser
-
-	const [calculateCalories, setCalculateCalories] = useState('')
-	const [totalCalories, setTotalCalories] = useState(2000)
-	const [bmi, setBMI] = useState(21)
-	// console.log('Home.user: ', user.calories)
-// const {weight, goal_weight, height, age, activity_level, mf, calories, water, water_count} = user
-	// console.log('Home.user.weight: ', user.weight, 
-	// 	'Home.user.goal_weight: ', user.goal_weight,
-	// 	'Home.user.height: ', user.height,
-	// 	'Home.user.age: ', user.age,
-	// 	'Home.user.activity_level: ', user.activity_level,
-	// 	'Home.user.mf: ', user.mf)
-
-	// const baseValue = (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +5) * user.activity_level)*user.mf)
-	// const totalCalories = (user.goal_weight>user.weight) ? (baseValue*1.11) : (baseValue*0.89)
-
-	useEffect(()=>{
-		setCalculateCalories(((10*(weight) + 6.25*(height) - 5*(age) + mf) * activity_level))
-		  }, [weight, height, age, mf, activity_level])
-
-	useEffect(()=>{
-		if (goal_weight === weight){
-			setTotalCalories(Math.floor(calculateCalories))
-		} else {
-		(goal_weight>weight) ? setTotalCalories(Math.floor(calculateCalories*1.13)) : setTotalCalories(Math.floor(calculateCalories*0.87))
-		}
-		  }, [calculateCalories])
-
-	// function sameWeight(){
-	// 	goal_weight === weight
-	// }
-
-	useEffect(()=>{
-    console.log('homeUser.weight*******: ', weight)
-  	}, [homeUser])
+	const {user} = store
+	const [homeUser, setHomeUser] = useState(initialUserState)
 
 	useEffect(()=>{
 		setHomeUser(user)
-		console.log('useEffect.home: ', user)
-	}, [user])
+		  }, [user])
 
-	useEffect(()=> {
-		console.log('homeUser: ', homeUser)
-	}, [homeUser])
+	const [calculateCalories, setCalculateCalories] = useState('')
+	const [totalCalories, setTotalCalories] = useState("")
+
+	useEffect(()=>{
+		setCalculateCalories(((10*(homeUser.weight) + 6.25*(homeUser.height) - 5*(homeUser.age) + homeUser.mf) * homeUser.activity_level))
+	}, [homeUser.weight, homeUser.height, homeUser.age, homeUser.mf, homeUser.activity_level])
+
+	useEffect(()=>{
+		if (homeUser.goal_weight === homeUser.weight){
+			setTotalCalories(Math.floor(calculateCalories))
+		} else {
+		(homeUser.goal_weight>homeUser.weight) ? setTotalCalories(Math.floor(calculateCalories*1.13)) : setTotalCalories(Math.floor(calculateCalories*0.87))
+		}
+	}, [calculateCalories])
 
 	useEffect(() => {
 		updateUser( {id: homeUser.id, ...homeUser})
 		.then((data) => {
 		  dispatch({type: 'setUser', data: data})
 		})
-	  }, [calories, water_count, weight])
+	}, [homeUser.calories, homeUser.water_count, homeUser.weight])
 	
 	const health = [
 		{SevereThinness: '<16'},
@@ -92,26 +82,22 @@ function Home() {
 		dispatch({type: 'updateWeight', data: weight})
 	}
 
-	// const weightDifference =  () => {
-	// 	sameWeight ? `keep current weight` : `${goal_weight - weight} to go`
-	// }
-
     return (
       <div>
-		<div style={{width:200}}><Progress value={calories} total={totalCalories}/></div>
-		<FormDialog value={AddSharpIcon} operator={addCalories} /> 
-        <FormDialog value={RemoveSharpIcon} operator={subtractCalories} />
-		<p>{`${user.calories} / ${totalCalories}`}</p>
-		<div style={{width:200}}><Progress value={water_count} total={water}/></div>
-		<FormDialog value={AddSharpIcon} operator={addWater}/> 
-        <FormDialog value={RemoveSharpIcon} operator={subtractWater} />
-		<p>{`${user.water_count} / ${water}`}</p>
+		<div style={{width:200}}><Progress value={homeUser.calories} total={totalCalories}/></div>
+		<FormDialog value={AddSharpIcon} operator={addCalories} max={totalCalories} min={1} /> 
+        <FormDialog value={RemoveSharpIcon} operator={subtractCalories} max={totalCalories} min={1} />
+		<p>{`${homeUser.calories} / ${totalCalories}`}</p>
+		<div style={{width:200}}><Progress value={homeUser.water_count} total={homeUser.water} /></div>
+		<FormDialog value={AddSharpIcon} operator={addWater} max={homeUser.water_count} min={1}/> 
+        <FormDialog value={RemoveSharpIcon} operator={subtractWater} max={homeUser.water_count} min={1} />
+		<p>{`${homeUser.water_count} / ${homeUser.water}`}</p>
 		<BMI />
-		<p>{weight}kg</p>
+		<p>{homeUser.weight}kg</p>
 		{/* <p>{weightDifference}</p> */}
-		<FormDialog value={AddSharpIcon} operator={updateWeight}/>
+		<FormDialog value={AddSharpIcon} operator={updateWeight} max={450} min={1}/>
       </div>
-    	);
+    );
   }
   
   

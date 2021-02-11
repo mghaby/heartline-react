@@ -8,18 +8,31 @@ import Index from './components/Home';
 import Settings from './components/Settings';
 import {StateContext} from './utils/stateContext'
 import reducer from './utils/stateReducer'
-import {getUser, getRandom, updateUser} from './services/userServices'
+import {getUser, getRandom} from './services/userServices'
 
 function App() {
 
   const initialState = {
-    user: sessionStorage.getItem('user') || null,
+    user: sessionStorage.getItem('user') || {
+      username: '',
+      password: '',
+      password_confirmation: '',
+      weight: 65,
+      height: 175,
+      age: 30,    
+      mf: 5,
+      activity_level: 1.2,
+      goal_weight: 65,
+      water: 2000,   
+      public: false,
+      calories: 0,
+      water_count: 0
+      },
     loggedInUser: sessionStorage.getItem('id') || null,
 		auth: {token:sessionStorage.getItem('token') || null},
     random: sessionStorage.getItem('random') || null
   }
 
-  // {username: "testing1", goal_weight: 100, weight: 120, age: 20}, {username: "test2", goal_weight: 101, weight: 121, age: 21}
   const [store, dispatch] = useReducer(reducer, initialState)
   const {user, loggedInUser} = store
 
@@ -40,19 +53,9 @@ function App() {
     .then((data) => {
     sessionStorage.setItem('random', data[0])
     dispatch({type: 'addRandom', data: data[0]})
-    // console.log('app.random.data: ', data[0])
-    // dispatch({type: 'addRandom', data: data[0]})
-    // console.log('app.getrandom.random: ', random[0])
-})
-    // console.log('weightlog.data:', data[0])})
+    })
     .catch((error) => console.log(error))
-    },[])
-
-  // useEffect(() => {
-  //   console.log('app.random: ', random)
-  // }, [random])
-
-  // console.log('app.random: ', random)
+  },[])
 
   return (
     <StateContext.Provider value={{store, dispatch}}>

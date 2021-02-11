@@ -79,8 +79,8 @@ const levels = [
 
 
 function SignUp() {
-  let history = useHistory()
   const classes = useStyles();
+  let history = useHistory()
   const initialFormState = {
     username: '',
     password: '',
@@ -127,7 +127,6 @@ function SignUp() {
     })
     .catch((error) => console.log(error)); 
     history.push('/Index')
-
   }
 
         // sessionStorage.setItem('user', formState)
