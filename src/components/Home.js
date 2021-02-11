@@ -85,19 +85,19 @@ function Home() {
     return (
       <div>
 		<div style={{width:200}}><Progress value={homeUser.calories} total={totalCalories}/></div>
-		<FormDialog value={AddSharpIcon} operator={addCalories} /> 
-        <FormDialog value={RemoveSharpIcon} operator={subtractCalories} />
+		<FormDialog value={AddSharpIcon} operator={addCalories} max={totalCalories} min={1} /> 
+        <FormDialog value={RemoveSharpIcon} operator={subtractCalories} max={totalCalories} min={1} />
 		<p>{`${homeUser.calories} / ${totalCalories}`}</p>
-		<div style={{width:200}}><Progress value={homeUser.water_count} total={homeUser.water}/></div>
-		<FormDialog value={AddSharpIcon} operator={addWater}/> 
-        <FormDialog value={RemoveSharpIcon} operator={subtractWater} />
+		<div style={{width:200}}><Progress value={homeUser.water_count} total={homeUser.water} /></div>
+		<FormDialog value={AddSharpIcon} operator={addWater} max={homeUser.water_count} min={1}/> 
+        <FormDialog value={RemoveSharpIcon} operator={subtractWater} max={homeUser.water_count} min={1} />
 		<p>{`${homeUser.water_count} / ${homeUser.water}`}</p>
 		<BMI />
 		<p>{homeUser.weight}kg</p>
 		{/* <p>{weightDifference}</p> */}
-		<FormDialog value={AddSharpIcon} operator={updateWeight}/>
+		<FormDialog value={AddSharpIcon} operator={updateWeight} max={450} min={1}/>
       </div>
-    	);
+    );
   }
   
   

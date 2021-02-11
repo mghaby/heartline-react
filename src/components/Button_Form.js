@@ -8,7 +8,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import {useGlobalState} from '../utils/stateContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,12 +26,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function FormDialog(props) {
-  const {store, dispatch} = useGlobalState()
-	// const {calories, water, user} = store
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(30);
+  const [value, setValue] = useState((props.max/2));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -51,16 +48,15 @@ export default function FormDialog(props) {
   };
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    if (value < props.min) {
+      setValue(props.min);
+    } else if (value > props.max) {
+      setValue(props.max);
     }
   }
 
     const handleSubmit = () => {
       props.operator(value)
-      console.log(value)
       setOpen(false);
     };
 
@@ -77,8 +73,8 @@ export default function FormDialog(props) {
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
-            min={1}
-            max={5000}
+            min={props.min}
+            max={props.max}
           />
         </Grid>
         <Grid item>
@@ -90,8 +86,8 @@ export default function FormDialog(props) {
             onBlur={handleBlur}
             inputProps={{
               step: 1,
-              min: 0,
-              max: 5000,
+              min: props.min,
+              max: props.max,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}

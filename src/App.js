@@ -13,7 +13,21 @@ import {getUser, getRandom} from './services/userServices'
 function App() {
 
   const initialState = {
-    user: sessionStorage.getItem('user') || null,
+    user: sessionStorage.getItem('user') || {
+      username: '',
+      password: '',
+      password_confirmation: '',
+      weight: 65,
+      height: 175,
+      age: 30,    
+      mf: 5,
+      activity_level: 1.2,
+      goal_weight: 65,
+      water: 2000,   
+      public: false,
+      calories: 0,
+      water_count: 0
+      },
     loggedInUser: sessionStorage.getItem('id') || null,
 		auth: {token:sessionStorage.getItem('token') || null},
     random: sessionStorage.getItem('random') || null
