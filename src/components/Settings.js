@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputSlider from './Slider'
@@ -8,6 +7,7 @@ import RadioButtonsGroup from './Radio'
 import NativeSelects from './Select'
 import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,25 +77,35 @@ const levels = [
 ]
 
 export default function Settings() {
+  const classes = useStyles();
+  let history = useHistory()
   const {store, dispatch} = useGlobalState()
 	const {user} = store
 
-  console.log('settings:', user)
-  // const initialFormState = user
+  const initialUserState = {
+		username: '',
+		password: '',
+		password_confirmation: '',
+		weight: 65,
+		height: 175,
+		age: 30,    
+		mf: 5,
+		activity_level: 1.2,
+		goal_weight: 65,
+		water: 2000,   
+		public: false,
+		calories: 0,
+		water_count: 0
+	  }
 
-	const [formState, setFormState] = useState(user)
+	const [formState, setFormState] = useState(initialUserState)
+
+  useEffect(()=>{
+		setFormState(user)
+		  }, [user])
 
   // console.log(initialFormState)
   console.log('formState', formState)
-  
-  const classes = useStyles();
-
-  function handleOnChange(event) {
-    setFormState({
-      ...formState,
-      [event.target.name]: event.target.value
-    })
-  }
 
   function handleGraphics(target, value) {
     const newValue = JSON.parse(value)
@@ -109,8 +119,8 @@ export default function Settings() {
     event.preventDefault()
     updateUser( {id: formState.id, ...formState})
     .then((data) => {
-      dispatch({type: 'setUser', data: data})
-    })
+      dispatch({type: 'setUser', data: data})})
+    history.push('/Index')
     console.log(formState)
   }
 
@@ -123,34 +133,6 @@ export default function Settings() {
        direction="column"
        justify="space-evenly"
        alignItems="center">
-
-    <h1>My Account </h1>
-
-    <br/>
-
-      <TextField
-          id="password"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="outlined"
-          name="password"
-          value={formState.password}
-          onChange={handleOnChange}/>
-
-      <br/>
-
-      {/* <TextField
-          id="passwordConfirm"
-          label="Password Confirmation"
-          type="password"
-          autoComplete="current-password"
-          variant="outlined"
-          name="password_confirmation"
-          value={formState.password_confirmation}
-          onChange={handleOnChange}/>
-
-      <br/> */}
 
       <h1>About Me</h1>
 
