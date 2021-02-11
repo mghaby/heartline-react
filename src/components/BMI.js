@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {useGlobalState} from '../utils/stateContext'
+import userEvent from '@testing-library/user-event';
 
 const useStyles = makeStyles({
   root: {
@@ -49,10 +50,17 @@ export default function BMI() {
 
   const [bmi, setBMI] = useState(21)
 
-  useEffect(() => {
-    setBMI((weight/(height^2)*10000))
-  },[weight, height])
+  // useEffect((user.weight, user.height) => {
+  //   setBMI(calculateBMI(weight,height))
+  // },[user])
   
+  // function calculateBMI(weight,height){
+  //   (weight/(height^2)*10000)
+  // // }
+  // useEffect(()=>{
+  //   console.log('BMI:', weight)
+  // }, user)
+
 
   return (
     <div className={classes.root}>

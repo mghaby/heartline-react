@@ -8,7 +8,7 @@ import Index from './components/Home';
 import Settings from './components/Settings';
 import {StateContext} from './utils/stateContext'
 import reducer from './utils/stateReducer'
-import {getUser, getRandom} from './services/userServices'
+import {getUser, getRandom, updateUser} from './services/userServices'
 
 function App() {
 
@@ -21,15 +21,18 @@ function App() {
 
   // {username: "testing1", goal_weight: 100, weight: 120, age: 20}, {username: "test2", goal_weight: 101, weight: 121, age: 21}
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {user, loggedInUser, random} = store
+  const {user, loggedInUser} = store
 
   useEffect(() => {
 		getUser(loggedInUser)
 		.then((data) => {
-      sessionStorage.setItem('user', data)})
+      sessionStorage.setItem('user', data)
+      dispatch({type: 'setUser', data: data})
+      console.log('app.getUser.data: ', data)
+    })
 		.catch((error) => console.log(error));
-    console.log('app.user: ', user)
-    console.log('app.loggedInUser: ', loggedInUser)
+    console.log('app.get.user: ', user)
+    console.log('app.get.loggedInUser: ', loggedInUser)
   },[loggedInUser])
 
   useEffect(() => {
@@ -37,18 +40,17 @@ function App() {
     .then((data) => {
     sessionStorage.setItem('random', data[0])
     dispatch({type: 'addRandom', data: data[0]})
-    console.log('app.random.data: ', data[0])
+    // console.log('app.random.data: ', data[0])
     // dispatch({type: 'addRandom', data: data[0]})
-    // console.log('weightlog.data: ' , data)
-    console.log('app.getrandom.random: ', random[0])
+    // console.log('app.getrandom.random: ', random[0])
 })
     // console.log('weightlog.data:', data[0])})
     .catch((error) => console.log(error))
     },[])
 
-  useEffect(() => {
-    console.log('app.random: ', random)
-  }, [random])
+  // useEffect(() => {
+  //   console.log('app.random: ', random)
+  // }, [random])
 
   // console.log('app.random: ', random)
 

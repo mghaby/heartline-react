@@ -7,7 +7,7 @@ import {signOut} from '../services/userServices'
 function Nav() {
 
 	const {store,dispatch} = useGlobalState()
-	const {loggedInUser} = store
+	const {user, loggedInUser} = store
 
 
 	function handleSignOut(event) {
@@ -41,7 +41,7 @@ function Nav() {
           </li>
         </ul>
         <Button onClick={handleSignOut}>Sign Out</Button>	
-				<h3>{loggedInUser}</h3>
+				<h3>{user.username}</h3>
       </div>
     )
 }
