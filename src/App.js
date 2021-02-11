@@ -7,9 +7,10 @@ import SignUp from './components/SignUp';
 import Index from './components/Home';
 import Settings from './components/Settings';
 import NotFound from './components/NotFound';
-import {StateContext} from './utils/stateContext';
-import reducer from './utils/stateReducer';
-import {getUser, getRandom} from './services/userServices';
+import {StateContext} from './utils/stateContext'
+import reducer from './utils/stateReducer'
+import {getUser, getRandom} from './services/userServices'
+import { Redirect } from 'react-router-dom';
 
 function App() {
 
@@ -63,7 +64,12 @@ function App() {
       <Router>
 			<Nav />
 			<Switch>
-        <Route exact path="/" component={Landing} />
+
+      <Route exact path="/">
+        {loggedInUser ? <Redirect to="/Index" /> : <Landing />}
+        </Route>
+
+        {/* <Route exact path="/" component={Landing} /> */}
         <Route path="/SignIn" component={SignIn} /> 
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Index" component={Index} />
