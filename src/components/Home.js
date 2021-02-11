@@ -4,16 +4,20 @@ import Progress from './Progess'
 import FormDialog from './Button_Form'
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
-import {getUser, updateUser} from '../services/userServices'
+import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
 
 function Home() {
 	const {store, dispatch} = useGlobalState()
 	const {user, loggedInUser} = store
-	// const {}
-	const {totalCalories, setTotalCalories} = useState('')
+	const [homeUser, setHomeUser] = useState(user)
+	const {weight, height, age, mf, activity_level, goal_weight, water, calories, water_count} = homeUser
+
+	const [calculateCalories, setCalculateCalories] = useState('')
+	const [totalCalories, setTotalCalories] = useState(2000)
+	const [bmi, setBMI] = useState(21)
 	// console.log('Home.user: ', user.calories)
-	// const {weight, goal_weight, height, age, activity_level, mf, calories, water, water_count} = user
+// const {weight, goal_weight, height, age, activity_level, mf, calories, water, water_count} = user
 	// console.log('Home.user.weight: ', user.weight, 
 	// 	'Home.user.goal_weight: ', user.goal_weight,
 	// 	'Home.user.height: ', user.height,
@@ -21,19 +25,44 @@ function Home() {
 	// 	'Home.user.activity_level: ', user.activity_level,
 	// 	'Home.user.mf: ', user.mf)
 
-	const [bmi, setBMI] = useState(21)
-
 	// const baseValue = (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +5) * user.activity_level)*user.mf)
 	// const totalCalories = (user.goal_weight>user.weight) ? (baseValue*1.11) : (baseValue*0.89)
 
 	useEffect(()=>{
+		setCalculateCalories(((10*(weight) + 6.25*(height) - 5*(age) + mf) * activity_level))
+		  }, [weight, height, age, mf, activity_level])
 
-	}, [user.weight])
+	useEffect(()=>{
+		if (goal_weight === weight){
+			setTotalCalories(Math.floor(calculateCalories))
+		} else {
+		(goal_weight>weight) ? setTotalCalories(Math.floor(calculateCalories*1.13)) : setTotalCalories(Math.floor(calculateCalories*0.87))
+		}
+		  }, [calculateCalories])
 
-// 	function totalCalories(){
-// 		setTotalCalories((user.goal_weight>user.weight) ? (((10*(user.weight) + 6.25*(user.height) - 5*(user.age) +user.mf) * user.activity_level))*1.11 : 
-// 		(((10*(user.weight) + 6.25*(user.height) - 5*(user.age) + user.mf) * user.activity_level))*0.89)
-// }
+	// function sameWeight(){
+	// 	goal_weight === weight
+	// }
+
+	useEffect(()=>{
+    console.log('homeUser.weight*******: ', weight)
+  	}, [homeUser])
+
+	useEffect(()=>{
+		setHomeUser(user)
+		console.log('useEffect.home: ', user)
+	}, [user])
+
+	useEffect(()=> {
+		console.log('homeUser: ', homeUser)
+	}, [homeUser])
+
+	useEffect(() => {
+		updateUser( {id: homeUser.id, ...homeUser})
+		.then((data) => {
+		  dispatch({type: 'setUser', data: data})
+		})
+	  }, [calories, water_count, weight])
 	
 	const health = [
 		{SevereThinness: '<16'},
@@ -63,33 +92,23 @@ function Home() {
 		dispatch({type: 'updateWeight', data: weight})
 	}
 
-	// useEffect(() => {
-	// 	updateUser( {id: formState.id, ...formState})
-	// 	.then((data) => {
-	// 	  dispatch({type: 'setUser', data: data})
-	// 	})
-	// },[user])
-
-	useEffect(() => {
-        getUser(loggedInUser)
-        .then((user) => dispatch({type: 'setUser', data: user}))
-        .catch((error) => console.log(error));
-    console.log('app.user: ', user)
-    console.log('app.loggedInUser: ', loggedInUser)
-    },[loggedInUser])
+	// const weightDifference =  () => {
+	// 	sameWeight ? `keep current weight` : `${goal_weight - weight} to go`
+	// }
 
     return (
       <div>
-		<div style={{width:200}}><Progress value={user.calories} total={totalCalories}/></div>
+		<div style={{width:200}}><Progress value={calories} total={totalCalories}/></div>
 		<FormDialog value={AddSharpIcon} operator={addCalories} /> 
         <FormDialog value={RemoveSharpIcon} operator={subtractCalories} />
 		<p>{`${user.calories} / ${totalCalories}`}</p>
-		<div style={{width:200}}><Progress value={user.water_count} total={user.water}/></div>
+		<div style={{width:200}}><Progress value={water_count} total={water}/></div>
 		<FormDialog value={AddSharpIcon} operator={addWater}/> 
         <FormDialog value={RemoveSharpIcon} operator={subtractWater} />
-		<p>{`${user.water_count} / ${user.water}`}</p>
+		<p>{`${user.water_count} / ${water}`}</p>
 		<BMI />
-		{user.weight}
+		<p>{weight}kg</p>
+		{/* <p>{weightDifference}</p> */}
 		<FormDialog value={AddSharpIcon} operator={updateWeight}/>
       </div>
     	);

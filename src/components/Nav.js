@@ -7,7 +7,7 @@ import {signOut} from '../services/userServices'
 function Nav() {
 
 	const {store,dispatch} = useGlobalState()
-	const {loggedInUser} = store
+	const {user, loggedInUser} = store
 
 
 	function handleSignOut(event) {
