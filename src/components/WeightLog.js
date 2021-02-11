@@ -36,12 +36,38 @@ function WeightLog(){
     const {store, dispatch} = useGlobalState();
     const {random} = store
 
-    const initialRandomState = {
+    const initialRandomState = [
+        {
+        username: 'username', 
+        goal_weight: 'goal_weight',
+        weight: 'weight',
+        age: 'age'
+    },
+    {
+        username: 'username', 
+        goal_weight: 'goal_weight',
+        weight: 'weight',
+        age: 'age'
+    },
+    {
+        username: 'username', 
+        goal_weight: 'goal_weight',
+        weight: 'weight',
+        age: 'age'
+    },
+    {
+        username: 'username', 
+        goal_weight: 'goal_weight',
+        weight: 'weight',
+        age: 'age'
+    },
+    {
         username: 'username', 
         goal_weight: 'goal_weight',
         weight: 'weight',
         age: 'age'
     }
+    ]
 
     const [randomUser, setRandomUser] = useState(initialRandomState)
 //     useEffect(() => {
@@ -62,6 +88,7 @@ function WeightLog(){
     },[random])
     // .then(() => {console.log('weightlog.random:', random.username)
     console.log('weightlog.random: ', random);
+
     return(
         <div>
         <Grid
@@ -71,70 +98,70 @@ function WeightLog(){
             alignItems="center">
             <Paper elevation={3}
             style={paperStyles}>
-                User: {randomUser.username}
+                User: {randomUser[0].username}
                 <br/>
                 <br/>
-                Goal: {randomUser.goal_weight} Kg
+                Goal: {randomUser[0].goal_weight} Kg
                 <br/>
                 <br/>
-                Current: {randomUser.weight} Kg
+                Current: {randomUser[0].weight} Kg
                 <br/>
                 <br/>
-                Age: {randomUser.age}
+                Age: {randomUser[0].age}
             </Paper>
 
 
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random[1].username}
+                User: {randomUser[1].username}
                 <br/>
                 <br/>
-                Goal: {random[1].goal_weight} Kg
+                Goal: {randomUser[1].goal_weight} Kg
                 <br/>
                 <br/>
-                Current: {random[1].weight} Kg
+                Current: {randomUser[1].weight} Kg
                 <br/>
                 <br/>
-                Age: {random[1].age}
+                Age: {randomUser[1].age}
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random[2].username}
+                User: {randomUser[2].username}
                 <br/>
                 <br/>
-                Goal: {random[2].goal_weight} Kg
+                Goal: {randomUser[2].goal_weight} Kg
                 <br/>
                 <br/>
-                Current: {random[2].weight} Kg
+                Current: {randomUser[2].weight} Kg
                 <br/>
                 <br/>
-                Age: {random[2].age}
+                Age: {randomUser[2].age}
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random[3].username}
+                User: {randomUser[3].username}
                 <br/>
                 <br/>
-                Goal: {random[3].goal_weight} Kg
+                Goal: {randomUser[3].goal_weight} Kg
                 <br/>
                 <br/>
-                Current: {random[3].weight} Kg
+                Current: {randomUser[3].weight} Kg
                 <br/>
                 <br/>
-                Age: {random[3].age}
+                Age: {randomUser[3].age}
             </Paper>
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random[4].username}
+                User: {randomUser[4].username}
                 <br/>
                 <br/>
-                Goal: {random[4].goal_weight} Kg
+                Goal: {randomUser[4].goal_weight} Kg
                 <br/>
                 <br/>
-                Current: {random[4].weight} Kg
+                Current: {randomUser[4].weight} Kg
                 <br/>
                 <br/>
-                Age: {random[4].age}
+                Age: {randomUser[4].age}
             </Paper>
         </Grid>
         </div>
