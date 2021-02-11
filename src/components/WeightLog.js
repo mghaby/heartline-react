@@ -3,10 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {useGlobalState} from '../utils/stateContext'
-import {getRandom} from '../services/userServices'
+// import {getRandom} from '../services/userServices'
 
 // make all text in here black/grey
 
+
+window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
 
 const paperStyles = {
     backgroundColor: "rgba(0,0,0, 0)",
@@ -70,6 +77,7 @@ function WeightLog(){
     ]
 
     const [randomUser, setRandomUser] = useState(initialRandomState)
+
 //     useEffect(() => {
 //     getRandom()
 //     .then((data) => {
