@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import BMI from './BMI'
 import Progress from './Progess'
 import FormDialog from './Button_Form'
-import AddSharpIcon from '@material-ui/icons/AddSharp';
-import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
+import Grid from '@material-ui/core/Grid';
 import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
+import WeightLog from './WeightLog';
 
 function Home() {
 	const initialUserState = {
@@ -33,7 +33,7 @@ function Home() {
 		  }, [user])
 
 	const [calculateCalories, setCalculateCalories] = useState('')
-	const [totalCalories, setTotalCalories] = useState("")
+	const [totalCalories, setTotalCalories] = useState('')
 
 	useEffect(()=>{
 		setCalculateCalories(((10*(homeUser.weight) + 6.25*(homeUser.height) - 5*(homeUser.age) + homeUser.mf) * homeUser.activity_level))
@@ -83,20 +83,78 @@ function Home() {
 	}
 
     return (
-      <div>
-		<div style={{width:200}}><Progress value={homeUser.calories} total={totalCalories}/></div>
-		<FormDialog value={AddSharpIcon} operator={addCalories} max={totalCalories} min={1} /> 
-        <FormDialog value={RemoveSharpIcon} operator={subtractCalories} max={totalCalories} min={1} />
-		<p>{`${homeUser.calories} / ${totalCalories}`}</p>
-		<div style={{width:200}}><Progress value={homeUser.water_count} total={homeUser.water} /></div>
-		<FormDialog value={AddSharpIcon} operator={addWater} max={homeUser.water_count} min={1}/> 
-        <FormDialog value={RemoveSharpIcon} operator={subtractWater} max={homeUser.water_count} min={1} />
-		<p>{`${homeUser.water_count} / ${homeUser.water}`}</p>
-		<BMI />
-		<p>{homeUser.weight}kg</p>
-		{/* <p>{weightDifference}</p> */}
-		<FormDialog value={AddSharpIcon} operator={updateWeight} max={450} min={1}/>
-      </div>
+      	<div>
+			<Grid container direction="row" justify="center" alignItems="center">
+				<Grid item xs={6} sm={3}>
+					<div style={{width:200}}><Progress value={homeUser.calories} total={totalCalories}/></div>
+					<FormDialog
+					icon={'+'}
+					operator={addCalories} 
+					max={totalCalories} 
+					min={1} 
+					title={'Calories'} 
+					message={'Please log a value to increment your calories'}
+					initialValue={250} 
+					/> 
+
+					<FormDialog 
+					icon={'-'} 
+					operator={subtractCalories} 
+					max={totalCalories} 
+					min={1} 
+					title={'Calories'} 
+					message={'Please log a value to decrement your calories'}
+					initialValue={250}
+					/>
+					<p>{`${homeUser.calories} / ${totalCalories}`}</p>
+				</Grid>
+
+		
+				<Grid item xs={6} sm={3}>
+					<div style={{width:200}}><Progress value={homeUser.water_count} total={homeUser.water} /></div>
+
+					<FormDialog
+					icon={'+'} 
+					operator={addWater} 
+					max={homeUser.water} 
+					min={1} 
+					title={'Water'} 
+					message={'Please log a value to increment your water consumption'}
+					initialValue={250}
+					/> 
+
+					<FormDialog 
+					icon={'-'} 
+					operator={subtractWater} 
+					max={homeUser.water} 
+					min={1} 
+					title={'Calories'} 
+					message={'Please log a value to decrement your water consumption'}
+					initialValue={250}
+					/>
+
+					<p>{`${homeUser.water_count} / ${homeUser.water} mL`}</p>
+
+				</Grid>
+					
+				<Grid item xs={6} sm={3}>
+					<BMI />
+
+					<p>{homeUser.weight}kg</p>
+
+					<FormDialog
+					icon={'+'} 
+					operator={updateWeight} 
+					max={450} 
+					min={1} 
+					title={'Current weight'} 
+					message={'Please log in your weight'} 
+					initialValue={homeUser.weight}
+					/>
+				</Grid>
+			</Grid>
+			<WeightLog />
+    	</div>
     );
   }
   

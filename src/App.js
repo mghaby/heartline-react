@@ -6,6 +6,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Index from './components/Home';
 import Settings from './components/Settings';
+import NotFound from './components/NotFound';
 import {StateContext} from './utils/stateContext'
 import reducer from './utils/stateReducer'
 import {getUser, getRandom} from './services/userServices'
@@ -57,7 +58,7 @@ function App() {
     })
     .catch((error) => console.log(error))
   },[])
-
+  
   return (
     <StateContext.Provider value={{store, dispatch}}>
       <Router>
@@ -73,6 +74,7 @@ function App() {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Index" component={Index} />
         <Route path='/Settings' component={Settings} />
+        <Route component={NotFound} />
 			</Switch>
 	  </Router>
     </StateContext.Provider>

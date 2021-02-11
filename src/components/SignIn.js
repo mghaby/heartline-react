@@ -51,12 +51,13 @@ function SignIn() {
   }
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <div>
+    <form >
       <Grid
         container
         direction="column"
         justify="space-evenly"
-        alignItems="flex-start">
+        alignItems="center">
 
       <TextField 
         id="outlined-username" 
@@ -92,6 +93,7 @@ function SignIn() {
 
     </Grid>
   </form >
+  </div>
 )
 }
 
