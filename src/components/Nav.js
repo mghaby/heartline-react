@@ -3,11 +3,14 @@ import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import {useGlobalState} from '../utils/stateContext'
 import {signOut} from '../services/userServices'
+import {useHistory} from 'react-router-dom'
+
 
 function Nav() {
 
 	const {store,dispatch} = useGlobalState()
-	const {user, loggedInUser} = store
+	const {user, loggedInUser} = store;
+  let history = useHistory();
 
 
 	function handleSignOut(event) {
@@ -18,8 +21,10 @@ function Nav() {
       dispatch({type: 'setLoggedInUser', data: null})
       dispatch({type: 'setToken', data: null})
     })
+    history.push('/')
 	}
 
+  
     return(
       <div>
       <h1>Nav</h1>

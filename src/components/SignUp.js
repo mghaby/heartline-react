@@ -126,7 +126,7 @@ function SignUp() {
       console.log('signup.data: ', data)
     })
     .catch((error) => console.log(error)); 
-    history.push('/Index')
+    history.push('/')
   }
 
         // sessionStorage.setItem('user', formState)
