@@ -25,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function FormDialog(props) {
+export default function FormDialog({icon, operator, max, min , title, message, initialValue}) {
   const classes = useStyles();
 
+initialValue
+
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState((props.max/2));
+  const [value, setValue] = useState(initialValue);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,33 +50,32 @@ export default function FormDialog(props) {
   };
 
   const handleBlur = () => {
-    if (value < props.min) {
-      setValue(props.min);
-    } else if (value > props.max) {
-      setValue(props.max);
+    if (value < min) {
+      setValue(min);
+    } else if (value > max) {
+      setValue(max);
     }
   }
 
     const handleSubmit = () => {
-      props.operator(value)
+      operator(value)
       setOpen(false);
     };
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}><props.value /></Button>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>{icon}</Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Calories</DialogTitle>
-        <DialogContent>
-            Please increment your calories below
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
+        <DialogContent>{message}
             <Grid container spacing={2} alignItems="center">
           <Grid item xs>
           <Slider
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
-            min={props.min}
-            max={props.max}
+            min={min}
+            max={max}
           />
         </Grid>
         <Grid item>
@@ -86,8 +87,8 @@ export default function FormDialog(props) {
             onBlur={handleBlur}
             inputProps={{
               step: 1,
-              min: props.min,
-              max: props.max,
+              min: {min},
+              max: {max},
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
@@ -99,7 +100,7 @@ export default function FormDialog(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose, handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Log
           </Button>
         </DialogActions>

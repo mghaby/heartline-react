@@ -96,6 +96,7 @@ function SignUp() {
     calories: 0,
     water_count: 0
   }
+  
   const[formState, setFormState] = useState(initialFormState)
   const {dispatch} = useGlobalState()
 
