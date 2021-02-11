@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -36,21 +36,32 @@ function WeightLog(){
     const {store, dispatch} = useGlobalState();
     const {random} = store
 
-    useEffect(() => {
-    getRandom()
-    .then((data) => {
-    sessionStorage.setItem('random', data[0])
-    dispatch({type: 'addRandom', data: data[0]})
-    console.log(data)
-    // dispatch({type: 'addRandom', data: data[0]})
-    // console.log('weightlog.data: ' , data)
-})
-    // console.log('weightlog.data:', data[0])})
-    .catch((error) => console.log(error))
-    },[])
+    const initialRandomState = {
+        username: 'username', 
+        goal_weight: 'goal_weight',
+        weight: 'weight',
+        age: 'age'
+    }
+
+    const [randomUser, setRandomUser] = useState(initialRandomState)
+//     useEffect(() => {
+//     getRandom()
+//     .then((data) => {
+//     sessionStorage.setItem('random', data[0])
+//     dispatch({type: 'addRandom', data: data[0]})
+//     console.log('weightlog.data: ', data)
+//     // dispatch({type: 'addRandom', data: data[0]})
+//     // console.log('weightlog.data: ' , data)
+// })
+//     // console.log('weightlog.data:', data[0])})
+//     .catch((error) => console.log(error))
+//     },[])
     
+    useEffect(() => {
+        setRandomUser(random)
+    },[random])
     // .then(() => {console.log('weightlog.random:', random.username)
-    console.log(random);
+    console.log('weightlog.random: ', random);
     return(
         <div>
         <Grid
@@ -60,16 +71,16 @@ function WeightLog(){
             alignItems="center">
             <Paper elevation={3}
             style={paperStyles}>
-                User: {random[0].username}
+                User: {randomUser.username}
                 <br/>
                 <br/>
-                Goal: {random[0].goal_weight} Kg
+                Goal: {randomUser.goal_weight} Kg
                 <br/>
                 <br/>
-                Current: {random[0].weight} Kg
+                Current: {randomUser.weight} Kg
                 <br/>
                 <br/>
-                Age: {random[0].age}
+                Age: {randomUser.age}
             </Paper>
 
 

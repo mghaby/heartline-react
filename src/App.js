@@ -8,7 +8,7 @@ import Index from './components/Home';
 import Settings from './components/Settings';
 import {StateContext} from './utils/stateContext'
 import reducer from './utils/stateReducer'
-import {getUser} from './services/userServices'
+import {getUser, getRandom} from './services/userServices'
 
 function App() {
 
@@ -30,11 +30,27 @@ function App() {
 		.catch((error) => console.log(error));
     console.log('app.user: ', user)
     console.log('app.loggedInUser: ', loggedInUser)
-    console.log('app.random: ', random)
-
   },[loggedInUser])
 
-  console.log('app.random: ', random)
+  useEffect(() => {
+    getRandom()
+    .then((data) => {
+    sessionStorage.setItem('random', data[0])
+    dispatch({type: 'addRandom', data: data[0]})
+    console.log('app.random.data: ', data[0])
+    // dispatch({type: 'addRandom', data: data[0]})
+    // console.log('weightlog.data: ' , data)
+    console.log('app.getrandom.random: ', random[0])
+})
+    // console.log('weightlog.data:', data[0])})
+    .catch((error) => console.log(error))
+    },[])
+
+  useEffect(() => {
+    console.log('app.random: ', random)
+  }, [random])
+
+  // console.log('app.random: ', random)
 
   return (
     <StateContext.Provider value={{store, dispatch}}>
