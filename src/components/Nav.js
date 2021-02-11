@@ -41,7 +41,7 @@ function Nav() {
           </li>
         </ul>
         <Button onClick={handleSignOut}>Sign Out</Button>	
-				<h3>{user.username}</h3>
+				<h3>{loggedInUser}</h3>
       </div>
     )
 }
