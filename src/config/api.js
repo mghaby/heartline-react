@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const heartLineApi = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://heartline-api.herokuapp.com'
 })
 
 heartLineApi.interceptors.request.use((req) => {
