@@ -132,6 +132,7 @@ function Home() {
 					<br/>
 					<h1>Weight</h1>
 					<p>{homeUser.weight}kg</p>
+					{homeUser.goal_weight === homeUser.weight ? <p>Keep current weight</p> : <p>{Math.abs(homeUser.goal_weight - homeUser.weight)}kg to go</p>}
 
 					<FormDialog
 					icon={'+'} 
