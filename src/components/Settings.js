@@ -113,7 +113,7 @@ export default function Settings() {
     updateUser( {id: formState.id, ...formState})
     .then((data) => {
       dispatch({type: 'setUser', data: data})})
-    history.push('/Index')
+    history.push('/Home')
     console.log(formState)
   }
 

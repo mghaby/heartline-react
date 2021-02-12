@@ -117,7 +117,10 @@ function SignUp() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    signUp(formState)
+    if (formState.username == "" || formState.password == "" || formState.password_confirmation == "" || formState.password !== formState.password_confirmation){
+      alert('An error has occurred during registration. Please fill in a username and have password and password confirmation identical')
+    } else {
+      signUp(formState)
     .then((data) => {
       sessionStorage.setItem('id', data.id)
       sessionStorage.setItem('token', data.jwt)
@@ -129,25 +132,26 @@ function SignUp() {
     .catch((error) => console.log(error)); 
     history.push('/')
   }
-
+    
+  }
         // sessionStorage.setItem('user', formState)
   return (
     <div>
         <p style={{textAlign: 'left', margin : '10px', color: '#023e8a'}}>Our system uses an algorithim to calculate YOUR needs for YOUR goals! Please input your details below in the metric system.</p>
-    <form>
+    <form >
       <Grid
        container
        direction="column"
        justify="space-evenly"
        alignItems="center">
+    <br/>
 
     <h1>My Account </h1>
 
     <br/>
-
     <TextField
           required
-          id="username"
+          id="username standard-error"
           label="Username"
           type="text"
           variant="outlined" 
@@ -179,6 +183,7 @@ function SignUp() {
           value={formState.password_confirmation}
           onChange={handleOnChange}/>
 
+      <br/>
       <br/>
 
       <h1>About Me</h1>
@@ -215,6 +220,8 @@ function SignUp() {
 
       <br/>
 
+      <h4>Gender</h4>
+
       <RadioButtonsGroup 
       initialValue={formState.mf.toString()} 
       handleGraphics={handleGraphics} 
@@ -223,11 +230,13 @@ function SignUp() {
 
       <br/>
 
+      <h4>Your activity level</h4>
       <NativeSelects
       initialValue={formState.activity_level} 
       levels={levels} name={'activity_level'} 
       handleGraphics={handleGraphics}/>
 
+      <br/>
       <br/>
 
       <h1>My Goals</h1>
@@ -253,6 +262,7 @@ function SignUp() {
       min={250}/>
 
       <br/>
+      <h4>Make your progress public?</h4>
 
       <RadioButtonsGroup 
       initialValue={formState.public.toString()} 
