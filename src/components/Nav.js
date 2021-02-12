@@ -18,7 +18,21 @@ function Nav() {
 		event.preventDefault()
 		signOut(loggedInUser)
 		.then(() => {
-      dispatch({type: 'setUser', data: null})
+      dispatch({type: 'setUser', data: {
+        username: '',
+        password: '',
+        password_confirmation: '',
+        weight: 65,
+        height: 175,
+        age: 30,    
+        mf: 5,
+        activity_level: 1.2,
+        goal_weight: 65,
+        water: 2000,   
+        public: false,
+        calories: 0,
+        water_count: 0
+        }})
       dispatch({type: 'setLoggedInUser', data: null})
       dispatch({type: 'setToken', data: null})
     })
@@ -34,7 +48,7 @@ function Nav() {
           alignItems="center"
         >
         <div>
-        <Link to="/Index" >Home</Link>
+        <Link to="/Home" >Home</Link>
         </div>
         
         <div>
@@ -43,7 +57,7 @@ function Nav() {
         
         <Button onClick={handleSignOut}>Sign Out</Button>
 
-				<h3>{user.username || null}</h3>
+				<h3>{loggedInUser && user.username}</h3>
         </Grid>
       ) 
     } else {

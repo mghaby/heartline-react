@@ -4,7 +4,7 @@ import Nav from './components/Nav';
 import Landing from './components/Landing';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import Index from './components/Home';
+import Home from './components/Home';
 import Settings from './components/Settings';
 import NotFound from './components/NotFound';
 import {StateContext} from './utils/stateContext'
@@ -64,17 +64,18 @@ function App() {
       <Router>
 			<Nav />
 			<Switch>
-
-      <Route exact path="/">
-        {loggedInUser ? <Redirect to="/Index" /> : <Landing />}
-      </Route>
-
-        {/* <Route exact path="/" component={Landing} /> */}
+      <Route exact path="/">{loggedInUser ? <Redirect to="/Home" /> : <Landing />}</Route>
+      <Route path="/SignIn">{loggedInUser ? <Redirect to="/Home" /> : <SignIn />}</Route>
+      <Route path="/SignUp">{loggedInUser ? <Redirect to="/Home" /> : <SignUp />}</Route>
+      <Route path="/Home">{loggedInUser ? <Home /> : <Redirect to="/" />}</Route>
+      <Route path="/Settings">{loggedInUser ? <Settings /> : <Redirect to="/" />}</Route>
+      <Route component={NotFound} />
+        {/* <Route exact path="/" component={Landing} />{loggedInUser ? <Redirect to="/Index" />: <Landing />}</Route>
         <Route path="/SignIn" component={SignIn} /> 
         <Route path="/SignUp" component={SignUp} />
         <Route path="/Index" component={Index} />
         <Route path='/Settings' component={Settings} />
-        <Route component={NotFound} />
+        <Route component={NotFound} /> */}
 			</Switch>
 	  </Router>
     </StateContext.Provider>

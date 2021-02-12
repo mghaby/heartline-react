@@ -76,4 +76,3 @@ describe('signing out', () => {
         expect('your-session-cookie').to.equal(false)
     })
 })
-
