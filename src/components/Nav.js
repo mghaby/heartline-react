@@ -35,10 +35,15 @@ function Nav() {
         >
         <div>
         <Link to="/Index" >Home</Link>
-        <Link to="/Settings" >Settings</Link>
-        <Button onClick={handleSignOut}>Sign Out</Button>
-				<h3>{user.username || null}</h3>
         </div>
+        
+        <div>
+        <Link to="/Settings" >Settings</Link>
+        </div>
+        
+        <Button onClick={handleSignOut}>Sign Out</Button>
+
+				<h3>{user.username || null}</h3>
         </Grid>
       ) 
     } else {
@@ -51,7 +56,13 @@ function Nav() {
           >
           <div>
           <Link to="/" >Landing</Link>
+          </div>
+          
+          <div>
           <Link to="/SignIn" >SignIn</Link>
+          </div>
+          
+          <div>
           <Link to="/SignUp" >SignUp</Link>
           </div>
           </Grid>
