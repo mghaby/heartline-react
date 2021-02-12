@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import InputSlider from './Slider'
 import RadioButtonsGroup from './Radio'
 import NativeSelects from './Select'
-import {getUser, updateUser} from '../services/userServices'
+import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
 import {useHistory} from 'react-router-dom'
 
@@ -82,22 +82,28 @@ export default function Settings() {
   const {store, dispatch} = useGlobalState()
 	const {user, loggedInUser} = store
 
-	const [formState, setFormState] = useState(user)
+  const initialUserState = {
+		username: '',
+		password: '',
+		password_confirmation: '',
+		weight: 65,
+		height: 175,
+		age: 30,    
+		mf: 5,
+		activity_level: 1.2,
+		goal_weight: 65,
+		water: 2000,   
+		public: false,
+		calories: 0,
+		water_count: 0
+	  }
 
-  useEffect(() => {
-		getUser(loggedInUser)
-		.then((data) => {
-      sessionStorage.setItem('user', data)
-      dispatch({type: 'setUser', data: data})
-    })
-		.catch((error) => console.log(error));
-  },[loggedInUser])
+	const [formState, setFormState] = useState(initialUserState)
 
   useEffect(()=>{
 		setFormState(user)
 		  }, [user])
 
-  // console.log(initialFormState)
   console.log('formState', formState)
 
   function handleGraphics(target, value) {

@@ -36,17 +36,6 @@ const marks = [
     }
   ];
 
-  const health = [
-		{SevereThinness: '<16'},
-		{ModerateThinness: '16 - 17'},
-		{MildThinness: '17 - 18.5'},
-		{Normal: '18.5 - 25'},
-		{Overweight: '25 - 30'},
-		{ObeseClassI: '30 - 35'},
-		{ObeseClassII: '35 - 40'},
-		{ObeseClassIII: '>40'}
-	]
-
 export default function BMI() {
   const classes = useStyles();
 
@@ -85,6 +74,7 @@ export default function BMI() {
       <h1>BMI</h1>
       <br/>
       <Typography id="disabled-slider" gutterBottom />
+      
 
       <Slider
         disabled
