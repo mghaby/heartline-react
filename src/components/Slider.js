@@ -16,26 +16,26 @@ const useStyles = makeStyles({
 
 export default function InputSlider({initialValue, handleGraphics, name, label, max, min}) {
   const classes = useStyles();
-  const [value, setValue] = useState(initialValue);
+  const [sValue, setSValue] = useState(initialValue);
 
   // useEffect(()=>{handleGraphics({name}, value)},[value])
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-    {handleGraphics({name}, value)}
+    setSValue(newValue);
+    handleGraphics({name}, sValue)
   };
 
 
   const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-    handleGraphics({name}, value)
+    setSValue(event.target.value === '' ? '' : Number(event.target.value));
+    handleGraphics({name}, sValue)
   };
 
   const handleBlur = () => {
-    if (value < min) {
-      setValue(min);
-    } else if (value > max) {
-      setValue(max);
+    if (sValue < min) {
+      setSValue(min);
+    } else if (sValue > max) {
+      setSValue(max);
     }
   };
 
@@ -47,7 +47,7 @@ export default function InputSlider({initialValue, handleGraphics, name, label, 
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
           <Slider
-            value={typeof value === 'number' ? value : 0}
+            value={typeof sValue === 'number' ? sValue : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
             min={min}
@@ -58,7 +58,7 @@ export default function InputSlider({initialValue, handleGraphics, name, label, 
         <Grid item>
           <Input
             className={classes.input}
-            value={value}
+            value={sValue}
             margin="dense"
             onChange={handleInputChange}
             onBlur={handleBlur}
