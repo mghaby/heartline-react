@@ -6,7 +6,7 @@ import {useGlobalState} from '../utils/stateContext'
 
 const useStyles = makeStyles({
   root: {
-    width: 500
+    width: 400
   },
 });
 const marks = [
@@ -36,6 +36,17 @@ const marks = [
     }
   ];
 
+  const health = [
+		{SevereThinness: '<16'},
+		{ModerateThinness: '16 - 17'},
+		{MildThinness: '17 - 18.5'},
+		{Normal: '18.5 - 25'},
+		{Overweight: '25 - 30'},
+		{ObeseClassI: '30 - 35'},
+		{ObeseClassII: '35 - 40'},
+		{ObeseClassIII: '>40'}
+	]
+
 export default function BMI() {
   const classes = useStyles();
 
@@ -50,9 +61,10 @@ export default function BMI() {
   const [bMIStat, setBMIStat] = useState(initialUserStat)
 	const [calculateBMI, setCalculateBMI] = useState('')
 	const [bMI, setBMI] = useState(initialUserState)
-useEffect(()=>{
-  setBMIStat(user)
-		  }, [user])
+
+  useEffect(()=>{
+    setBMIStat(user)
+        }, [user])
 
   useEffect(()=>{
 		setCalculateBMI(Math.floor((bMIStat.weight/(bMIStat.height**2))*10000))
@@ -67,8 +79,11 @@ useEffect(()=>{
   })
 
 
+
   return (
     <div className={classes.root}>
+      <h1>BMI</h1>
+      <br/>
       <Typography id="disabled-slider" gutterBottom />
 
       <Slider

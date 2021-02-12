@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import BMI from './BMI'
 import Progress from './Progess'
-import FormDialog from './Button_Form'
+import FormDialog from './FormDialog'
 import Grid from '@material-ui/core/Grid';
 import {updateUser} from '../services/userServices'
 import {useGlobalState} from '../utils/stateContext'
@@ -53,17 +53,6 @@ function Home() {
 		  dispatch({type: 'setUser', data: data})
 		})
 	}, [homeUser.calories, homeUser.water_count, homeUser.weight])
-	
-	const health = [
-		{SevereThinness: '<16'},
-		{ModerateThinness: '16 - 17'},
-		{MildThinness: '17 - 18.5'},
-		{Normal: '18.5 - 25'},
-		{Overweight: '25 - 30'},
-		{ObeseClassI: '30 - 35'},
-		{ObeseClassII: '35 - 40'},
-		{ObeseClassIII: '>40'}
-	]
 
 	function addCalories(calories){
 		dispatch({type: 'addCalories', data: calories})
@@ -86,6 +75,7 @@ function Home() {
       	<div>
 			<Grid container direction="row" justify="center" alignItems="center">
 				<Grid item xs={6} sm={3}>
+					<h1>Calorie Consumption</h1>
 					<div style={{width:200}}><Progress value={homeUser.calories} total={totalCalories}/></div>
 					<FormDialog
 					icon={'+'}
@@ -106,13 +96,13 @@ function Home() {
 					message={'Please log a value to decrement your calories'}
 					initialValue={250}
 					/>
-					<p>{`${homeUser.calories} / ${totalCalories}`}</p>
+					<p>{`${homeUser.calories} / ${totalCalories} Calories`}</p>
 				</Grid>
 
 		
 				<Grid item xs={6} sm={3}>
+					<h1>Water Consumption</h1>
 					<div style={{width:200}}><Progress value={homeUser.water_count} total={homeUser.water} /></div>
-
 					<FormDialog
 					icon={'+'} 
 					operator={addWater} 
@@ -139,7 +129,8 @@ function Home() {
 					
 				<Grid item xs={6} sm={3}>
 					<BMI />
-
+					<br/>
+					<h1>Weight</h1>
 					<p>{homeUser.weight}kg</p>
 
 					<FormDialog
@@ -153,6 +144,8 @@ function Home() {
 					/>
 				</Grid>
 			</Grid>
+        <hr/>
+        <br/>
 			<WeightLog />
     	</div>
     );

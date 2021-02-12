@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
 export default function FormDialog({icon, operator, max, min , title, message, initialValue}) {
   const classes = useStyles();
 
-initialValue
-
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(initialValue);
 

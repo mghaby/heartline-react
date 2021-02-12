@@ -67,7 +67,7 @@ function App() {
 
       <Route exact path="/">
         {loggedInUser ? <Redirect to="/Index" /> : <Landing />}
-        </Route>
+      </Route>
 
         {/* <Route exact path="/" component={Landing} /> */}
         <Route path="/SignIn" component={SignIn} /> 
